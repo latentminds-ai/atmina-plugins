@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.280.0
+
+Release v0.280.0
+Compare: https://github.com/latentminds-ai/atmina-mono/compare/v0.279.1...v0.280.0
+
+Bug fixes:
+- fix(kb): serve wiki/README.md as a published KB's home route (LAT-1916) (11014a23)
+
 ## v0.279.1
 
 Release v0.279.1
