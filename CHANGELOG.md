@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.279.1
+
+Release v0.279.1
+Compare: https://github.com/latentminds-ai/atmina-mono/compare/v0.279.0...v0.279.1
+
+Bug fixes:
+- fix(mcp): bound the rebuild reconcile pass and enforce its reservation (LAT-1913) (4b8f1336)
+- fix(mcp): end an errored rebuild whose freeze has lapsed (LAT-1914) (3be2e44c)
+
+Other:
+- docs: de-gate retrieval region and record the LAT-1667 legal verdict (351df0c8)
+
 ## v0.279.0
 
 Release v0.279.0
