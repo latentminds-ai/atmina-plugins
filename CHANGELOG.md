@@ -1,5 +1,21 @@
 # Changelog
 
+## v0.279.0
+
+Release v0.279.0
+Compare: https://github.com/latentminds-ai/atmina-mono/compare/v0.278.0...v0.279.0
+
+Features:
+- feat(skills): Maintain reports durable pages that have never been recalled (LAT-1907) (e3285d57)
+
+Bug fixes:
+- fix(kb-view): derive menu sections for folders outside the CodeWiki set (LAT-1905) (9ef33901)
+- fix(plugins): gate every publishable skill instead of only the master (LAT-1906) (775d0882)
+
+Other:
+- docs: split health wiring into 3a/3b and require the origin caveat (LAT-1902) (c216995f)
+- docs: spec the atmina-memory pack distribution payload (LAT-1902) (f7e346eb)
+
 ## v0.278.0
 
 Release v0.278.0
