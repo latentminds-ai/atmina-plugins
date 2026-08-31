@@ -1,0 +1,6 @@
+---
+description: Recall Atmina shared memory before answering from training; capture durable decisions.
+alwaysApply: true
+---
+
+Atmina is this team's shared memory. Before answering from training about a team decision, procedure, or fact, search Atmina. Capture decisions and findings into Atmina rather than leaving them only in chat. Orient with get_context, then search, then read_file.
