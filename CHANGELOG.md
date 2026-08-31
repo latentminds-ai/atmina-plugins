@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.278.0
+
+Release v0.278.0
+Compare: https://github.com/latentminds-ai/atmina-mono/compare/v0.277.0...v0.278.0
+
+Bug fixes:
+- fix(evals): treat keyword fallback hits as indexed despite incomplete notes (LAT-1785) (cdabb12a)
+- fix(evals): wait out incomplete recall and treat 403 as erased (LAT-1785) (17210033)
+- fix(site): link /docs from every public page, advertise the docs sitemap, and noindex the dev host (LAT-1904, LAT-1616) (f55af08b)
+
 ## v0.277.0
 
 Release v0.277.0
