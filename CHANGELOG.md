@@ -1,5 +1,21 @@
 # Changelog
 
+## v0.282.1
+
+Release v0.282.1
+Compare: https://github.com/latentminds-ai/atmina-mono/compare/v0.282.0...v0.282.1
+
+⚠ Breaking changes:
+- fix(auth)!: restore client compatibility after the 1.7 cut (LAT-1463) (a3be66a7)
+
+Bug fixes:
+- fix(auth): rewrite localhost loopback redirects to the IP literal (LAT-1463) (23005271)
+- fix(auth)!: restore client compatibility after the 1.7 cut (LAT-1463) (a3be66a7)
+
+Other:
+- docs(site): record the v0.282.1 publish decision in the ledger (04694cd5)
+- docs(site): curate the public release note for v0.282.1 (LAT-1463) (a300631c)
+
 ## v0.282.0
 
 Release v0.282.0
