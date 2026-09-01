@@ -1,6 +1,9 @@
 # Procedure — normative order
 
-Do the steps in this order. Skip none. This path never writes.
+Do the steps in this order. Skip none — but §1 Orient is once per session,
+not per recall: a recall of a known fact goes straight to `search` (§3). This
+path never writes.
+
 
 Shipped tools this skill may call: `whoami`, `health`, `list_kbs`,
 `get_context`, `search` (`path_prefix`, `ranking.boosts`, `filters`),
@@ -39,8 +42,12 @@ If the task names no artifact key, skip this step.
 
 ## 3. Durable search
 
+The product's `search` covers the whole KB, working notes included. This
+skill scopes to `wiki/` on purpose: working notes are candidates, not truth.
+
 ```
 search({
+
   query: "<the question>",
   scope: { path_prefix: "wiki/" },
   ranking: {

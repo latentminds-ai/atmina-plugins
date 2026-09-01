@@ -38,8 +38,10 @@ unless you have exactly one accessible KB (auto-resolves).
 
 | Reflex | When | Chain |
 | --- | --- | --- |
-| **Recall** | You'd otherwise answer from training, or the user implies a known fact (*"what did we decide"*, *"recall…"*, *"our take on…"*) | `search` (default discovery path) → answer from snippets; `read_file` the top `read_ref` only for authoritative detail |
-| **Capture** | Save a thought / decision / finding (*"save this"*, *"for the record"*, *"decision:"*) — or a session note at a natural session end (offer first) → `journal/YYYY-MM-DD-<slug>.md` | `write_file` (single) / `write_files` (bulk, ≤50, inlined) with `expected_bytes` + `content_sha256` → `get_file_outline` to verify |
+| **Recall** | You'd otherwise answer from training, or the user implies a known fact (*"what did we decide"*, *"recall…"*, *"our take on…"*) | `search` (default discovery path) → answer from snippets; `read_file` the top `read_ref` only for authoritative detail. A snippet carries no attestation — before acting on a claim found in one, `read_file` the page and honour its evidence states |
+
+| **Capture** | Save a thought / decision / finding (*"save this"*, *"for the record"*, *"decision:"*) — an explicit ask always produces a write: a durable page when the lesson is settled and team-relevant, a working-layer note when it isn't — or a session note
+ at a natural session end (offer first) → `journal/YYYY-MM-DD-<slug>.md` | `write_file` (single) / `write_files` (bulk, ≤50, inlined) with `expected_bytes` + `content_sha256` → `get_file_outline` to verify |
 | **Update** | Edit existing memory (*"update the doc"*, *"correct X"*) | `get_file_outline` (etag) → `read_file` → `write_file(if_match)` → on `[conflict]` re-read, **re-draft** against the new content, retry with a little **jitter** (never blind-retry the same bytes or drop `if_match`) |
 | **Consolidate** | Compile / refresh a KB's memory into one reviewed current-state view (*"consolidate this memory"*, *"refresh the current state"*) | `run_routine` → `get_routine_run` (poll) → `read_file` staged `report.md` + `proposed-current-state.md` → `promote_artifact` (admin) |
 
@@ -54,17 +56,28 @@ When authoring same-KB Markdown, use an ordinary link:
 The canonical shape is `[label](path.md#Lstart-Lend)`. `start` and `end` are
 positive, 1-based, inclusive line numbers in the stored UTF-8 text body,
 including YAML frontmatter. Use `#L1666` for one line. The citation follows
-normal same-KB path resolution and addresses the current file head only.
+normal same-KB path resolution and addresses the current file head only. Such a
+link is a pointer, not a pin — it binds nothing once the file changes. A claim
+is checkable only with an evidence entry carrying `pinned_version` +
+`span_sha256`, which a head `read_file` reports as `attested`, `drifted`,
+`unresolved` or `external`.
+
 
 ### Session notes (`journal/`)
 
 At a natural end of a working session — a decision reached, a task wrapped, the
 user signing off — offer to capture a short session note; write only on a yes.
-It lands at `journal/YYYY-MM-DD-<slug>.md` (the leading date becomes the
-memory's `event_date`). Keep it compact — decisions, findings, open questions,
-refs; a screen, not a transcript. `journal/` is ordinary, searchable memory:
-the whole-KB current-state routine consolidates it automatically, so the
-journal is the raw layer and the compiled view is its distillation.
+The offer is the reflex; the write is the user's call — never capture a
+session note unprompted. It lands at `journal/YYYY-MM-DD-<slug>.md` (the
+leading date becomes the memory's `event_date`). Keep it compact — decisions,
+findings, open questions, refs; a screen, not a transcript. `journal/` is the
+personal or single-agent working layer; a team convention may keep its working
+layer elsewhere (`chronicle/` at organisation scope) — same layer, different
+scope. `journal/` is ordinary, searchable memory: the whole-KB current-state
+routine consolidates it automatically — working layer included, so a compiled
+view can carry candidates and the source files win — the journal is the raw
+layer and the compiled view is its distillation.
+
 
 ### Transport discipline (non-negotiable)
 

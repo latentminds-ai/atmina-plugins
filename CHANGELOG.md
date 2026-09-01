@@ -1,5 +1,48 @@
 # Changelog
 
+## v0.282.0
+
+Release v0.282.0
+Compare: https://github.com/latentminds-ai/atmina-mono/compare/v0.281.0...v0.282.0
+
+⚠ Breaking changes:
+- fix(auth)!: close five defects the adversarial review confirmed (LAT-1463) (a6f806b2)
+- fix(auth)!: defer the RFC 8628 device flow to LAT-1898 (LAT-1463) (e12cee2b)
+- feat(auth)!: cut over the OAuth/MCP boundary to Better Auth 1.7 (LAT-1463) (d3b40888)
+
+Features:
+- feat(write): tell the writer, on the response, when a durable claim carries no locator — and count it (LAT-1926) (4b63c72d)
+- feat(evidence): diagnose the entries on a page that carry no resolvable locator (LAT-1926) (b670cee7)
+- feat(check): conformance-test the pack invariants in check:pack-skills (LAT-1925) (f3ae101c)
+- feat(move): report the pages that cite a moved memory as evidence (LAT-1927 AC 3) (92688344)
+- feat(versioning): retain a pin its citing page can no longer resolve (LAT-1927 AC 2) (47304b20)
+- feat(auth): scope ceiling at the tool boundary, grant activation and revocation routes (LAT-1463) (753e2774)
+- feat(auth)!: cut over the OAuth/MCP boundary to Better Auth 1.7 (LAT-1463) (d3b40888)
+
+Bug fixes:
+- fix(ci): move migration segmentation to a side-effect-free lib module (LAT-1463) (ca244db8)
+- fix(ci): stop a mentioned statement-breakpoint from splitting a migration (LAT-1463) (65dc2946)
+- fix(auth)!: close five defects the adversarial review confirmed (LAT-1463) (a6f806b2)
+- fix(auth)!: defer the RFC 8628 device flow to LAT-1898 (LAT-1463) (e12cee2b)
+- fix(auth): reconcile the trusted-client seed and the 1.7 erasure path (LAT-1463) (1c0945f4)
+
+Other:
+- docs(site): tell connected agents they will re-authorise once after v0.282.0 (LAT-1463) (31ec424e)
+- docs(site): add the move, write-diagnostic and operating-model lines to the v0.282.0 note (LAT-1925) (7faffeb8)
+- docs(site): curate the public release note for v0.282.0 (LAT-1902) (4da51862)
+- docs(operating-model): OM-17 — the write diagnostic says structure, never truth, on every surface (LAT-1926) (358dc110)
+- test(mcp): conformance-test the baseline invariants on every surface that carries them (LAT-1925) (5947092c)
+- docs(skills): declare the same on the pack side and gate the session note on consent (LAT-1925) (60f9f7c2)
+- docs(mcp): declare the scope differences and rulings on every baseline surface (LAT-1925) (3454f988)
+- docs(adr): 0061 — operating-model invariants are conformance-tested per surface (LAT-1925) (2615d3da)
+- docs(skills): let the archive step check its scan against evidence_citers (LAT-1927 AC 5) (1d97455e)
+- docs(move): say what a move does to other pages, exactly (LAT-1927 AC 4) (02c33011)
+- test(move): establish the evidence-citer blast radius of a move (LAT-1927 AC 1) (cafb95b5)
+- test(web): make the disconnected-date assertion locale-independent (LAT-1463) (b3b18ec7)
+- chore(deps): waive the 1.7.2 release-age gate on Markus's overrule (LAT-1463) (169b8735)
+- docs(auth): record the adversarial review and Markus's ratifications (LAT-1463) (9b74ad32)
+- docs(auth): record the device-flow deferral (LAT-1463) (138dcf11)
+
 ## v0.281.0
 
 Release v0.281.0

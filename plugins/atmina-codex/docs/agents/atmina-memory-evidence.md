@@ -138,8 +138,10 @@ written with `schema: 2` yields no evidence at all (cliff 1).
 
 ### 3.1 Never write `content_sha256`
 
-That field name already means something else. This pack writes
-`span_sha256`, never `content_sha256`, under any circumstance.
+`content_sha256` is a `write_file` argument — a whole-body transport check on
+the write itself — and never an evidence-entry field. Inside an entry this
+pack writes `span_sha256`, never `content_sha256`, under any circumstance.
+
 
 ### 3.2 Never use `from` / `to` for lines
 

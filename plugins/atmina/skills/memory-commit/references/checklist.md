@@ -34,7 +34,8 @@ Convention reference:
 | 13 | Every entry has a non-empty `type` from W0-1 §2. | **2** |
 | 14 | Every entry has a non-empty `note`. | **2** |
 | 15 | Every `url` is absolute `https://`, with no `user:pass@` in it, and parses as a URL. | **3** — the field is dropped, the entry survives, and the citation names nothing. |
-| 16 | No entry carries `content_sha256`. Never write that field. | none in the product; it already means something else. |
+| 16 | No entry carries `content_sha256`. `content_sha256` is a `write_file` argument (a whole-body transport check), never an evidence-entry field.
+ | none in the product; it already means something else. |
 | 17 | `from` and `to` are not used for lines. Line numbers live in the body link fragment only. | same — those field names are reserved for a different meaning. |
 | 18 | The page has at least one taught typed evidence entry. | a durable claim with only `source:` is provenance without a locator. |
 

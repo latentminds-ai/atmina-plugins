@@ -1,6 +1,7 @@
 ---
 name: memory-observe
-description: Records working-layer notes and end-of-task session notes in an Atmina Knowledge Base so candidates stay out of organisational truth. Org default is chronicle/YYYY-MM-DD-<slug>.md; personal or single-agent scope may use journal/ or one durable file; never writes wiki/, compiled views, or source mirrors. A session note is an index of the task, what was gathered, what was decided, and wiki paths and system-of-record locators — not a transcript. Gathering sources is not a durable write. Nothing notable is a successful no-op. Use when mid-task candidates or a session note need to land in the working layer, or when an agent would otherwise save a brief, finding, or transcript into the wiki.
+description: Records working-layer notes and end-of-task session notes (offered first, written only on a yes) in an Atmina Knowledge Base so candidates stay out of organisational truth.
+ Org default is chronicle/YYYY-MM-DD-<slug>.md; personal or single-agent scope may use journal/ or one durable file; never writes wiki/, compiled views, or source mirrors. A session note is an index of the task, what was gathered, what was decided, and wiki paths and system-of-record locators — not a transcript. Gathering sources is not a durable write. Nothing notable is a successful no-op. Use when mid-task candidates or a session note need to land in the working layer, or when an agent would otherwise save a brief, finding, or transcript into the wiki.
 metadata:
   pack: atmina-memory
 ---
@@ -19,12 +20,19 @@ working-layer note."
 
 - Mid-task, a candidate, finding, or brief that must not be read as committed
   truth.
-- Task end, when something notable happened: a decision, an open question, a
-  path or locator worth finding again.
+- Task end, when something notable happened — a decision, an open question, a
+  path or locator worth finding again — **and the user said yes**. Offer the
+  session note first; write only on a yes; never capture a session note
+  unprompted. Candidates appended mid-task as part of the work are not
+  session notes and need no offer.
 - Any moment an agent would otherwise save a session note, transcript, or
   gathered brief under `wiki/`.
 
 If nothing notable was learned, **do not write**. No-op is success. Say so.
+An explicit ask to save is different: it always produces a write — a durable
+page when it meets the commit bar, otherwise a working-layer note here. Never a
+silent no-op on an explicit ask.
+
 
 ## The rule
 

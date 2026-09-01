@@ -54,3 +54,12 @@ operator named that path. Do not archive `chronicle/` notes as
 
 Record the old path, the new path, and `file_id` in the trail. Do not
 rewrite live claim bodies to match.
+
+The move result carries the platform's own list, `evidence_citers`: the
+pages whose evidence entries resolved to the moved file, with their
+entry ids. It is a report, not a rewrite. With `checked: true`, any page
+it names is one the pre-move scan missed — flag it in the trail with the
+citing page and evidence `id`, as step 4 would have. With
+`checked: false` the claim index was not read and the list says nothing;
+the pre-move scan stands alone.
+

@@ -9,7 +9,10 @@ metadata:
 
 Out of band. Report-only (G6), except archive via `move_file` and the trail
 write. The claim-repair pass is carried here, in this skill; nothing else
-needs to be installed for it.
+needs to be installed for it. The product's consolidate routine compiles a
+current-state view; it does not review, repair, or archive memory. This pass
+is not that routine and does not run it.
+
 
 **Announce at start:** "I'm using the memory-maintain skill to run an
 out-of-band report-only maintain pass."

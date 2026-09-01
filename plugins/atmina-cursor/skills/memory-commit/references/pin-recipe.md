@@ -128,7 +128,10 @@ primitive tree. A live Commit cites a page under `wiki/decisions/` /
 - `pinned_version`: the `version_n` from step 2.2, as a bare integer. `"3"` in
   quotes is no pin.
 - `span_sha256`: the 64 lowercase hex characters from step 4. Never write
-  `content_sha256`.
+  `content_sha256` here: `content_sha256` is a `write_file` argument — a
+  whole-body transport check on the write itself — and never an
+  evidence-entry field.
+
 - `note`: what the span is and when it was pinned. Non-empty, or the entry is
   dropped.
 

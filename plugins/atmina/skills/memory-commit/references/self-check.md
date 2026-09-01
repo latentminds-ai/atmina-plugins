@@ -9,6 +9,17 @@ is an optional parallel; do not skip this because it might land.
 Inputs: the `kb_id`, the page `path`, and the `etag` and `version_n` the
 write returned. The write response field is `version_n`, not `version`.
 
+`get_file_outline` (size + sha) confirms the bytes landed — that is the
+product's transport check, and it says nothing about the claim. This read-back
+checks the claim; only a head `read_file` says whether it is verifiable.
+
+The write response may also carry `evidence_warning`, naming entries with no
+resolvable locator. It checks structure, never truth: a page can pass it and
+still be wrong. Act on it — fix the locator — but it does not replace this
+read-back.
+
+
+
 ## Step 1 — Read the page back at head
 
 `read_file({ kb_id, path })` — no `version`. Confirm:

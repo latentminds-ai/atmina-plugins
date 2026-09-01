@@ -18,7 +18,10 @@ it. Session notes are the dated files, not the card.
 ## Personal / single-agent
 
 `journal/YYYY-MM-DD-<slug>.md`, or one durable file the operator already uses
-as their working layer. Do not invent a second personal tree.
+as their working layer — same layer, different scope: `journal/` at personal
+or single-agent scope, `chronicle/` at organisation scope. Do not invent a
+second personal tree.
+
 
 The in-product Atmina skill still documents `journal/` on its own surface.
 This pack does not change that skill. Organisation working layer **here** is
@@ -32,7 +35,8 @@ path.
 | Path | Why |
 | --- | --- |
 | `wiki/` | Durable primitives. Observe never writes them. |
-| `_consolidated/` | Compiled convenience. Not durable memory. On conflict, source wins. |
+| `_consolidated/` | Compiled convenience. Not durable memory. The default current-state routine compiles the whole KB, working layer included, so a compiled view can carry candidates. On conflict, source wins. |
+
 | `_sources/` | Source mirrors. Not durable memory. |
 | `_staged/` | Unreviewed machine drafts. |
 

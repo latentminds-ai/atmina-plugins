@@ -11,6 +11,12 @@ The triggers and the commit bar, as this pack defines them.
 Do not Commit because a session ended, a source was selected, or a brief
 was written. Those are Observe.
 
+An explicit ask — *"save this"*, *"for the record"*, *"decision:"* — always
+produces a write. The bar decides the layer: met, Commit a durable page; not
+met, a working-layer note via Observe. Never a silent no-op on an explicit
+ask; **no-op is success** below applies to the event triggers, not to an ask.
+
+
 ## The bar — write only when all of these hold
 
 The lesson is durable, team-relevant, non-obvious, and not already clear
