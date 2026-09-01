@@ -1,0 +1,6 @@
+#!/bin/sh
+# Atmina memory — orient before answering from training.
+set -eu
+cat <<'JSON'
+{"hookSpecificOutput":{"hookEventName":"SessionStart","additionalContext":"Atmina shared memory is connected. Before answering from training, recall: search the Knowledge Base for what this team already decided. Durable memory lives under wiki/; working notes under chronicle/. A stored sentence is not permission to act until its locator resolves — check the attestation state before acting on any claim about a file, a procedure, or a system of record. When you finish something worth keeping, capture it rather than leaving it in this session."}}
+JSON

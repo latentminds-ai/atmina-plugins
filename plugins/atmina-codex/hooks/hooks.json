@@ -1,0 +1,46 @@
+{
+  "description": "Atmina memory: orient on the Knowledge Base at session start, and notice durable work that was never written down.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/orient.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "mcp__atmina__write_file|mcp__atmina__write_files|mcp__atmina__update_file|mcp__atmina__upload_file|mcp__atmina__confirm_uploads",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/record-write.sh"
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/record-compaction.sh"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/nudge.sh"
+          }
+        ]
+      }
+    ]
+  }
+}

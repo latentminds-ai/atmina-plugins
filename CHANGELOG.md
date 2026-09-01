@@ -1,5 +1,26 @@
 # Changelog
 
+## v0.281.0
+
+Release v0.281.0
+Compare: https://github.com/latentminds-ai/atmina-mono/compare/v0.280.0...v0.281.0
+
+Features:
+- feat(release): enforce reviewed-head delegation (LAT-1918) (574a1b31)
+- feat(plugins): task-boundary hooks across the three clients (LAT-1910, LAT-1911) (f13f17f9)
+- feat(plugins): publish the atmina-memory pack to all three clients (LAT-1908) (46215dda)
+- feat(skills): Maintain reports link health with the scope it did not check (LAT-1909) (e2116571)
+
+Bug fixes:
+- fix(mcp): bound rebuild continuations under paid Worker envelope (LAT-1918) (9bcc80c4)
+- fix(web): move the local-dev invitation fixture dates past the calendar (LAT-1919) (d7771c27)
+
+Other:
+- ci: prove rebuild limits and eval waiver in staged releases (LAT-1918) (348c6d02)
+- docs(agents): vendor the jakubkrehel interface skills at a pinned ref (0425f033)
+- docs: rescue three more stranded documents from feature worktrees (ee74d1dc)
+- docs: commit 20 plans, research notes, and lore entries stranded in the primary tree (5a635df7)
+
 ## v0.280.0
 
 Release v0.280.0

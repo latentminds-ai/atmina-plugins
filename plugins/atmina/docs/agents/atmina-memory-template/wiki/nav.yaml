@@ -1,0 +1,8 @@
+schema: 2
+sections:
+  - label: Start here
+    pages:
+      - wiki/README.md
+      - wiki/kb-profile.md
+  # generate_nav owns the rest; do not hand-author primitive sections that the
+  # generator will replace if marked generated.

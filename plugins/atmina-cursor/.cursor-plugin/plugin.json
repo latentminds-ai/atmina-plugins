@@ -1,6 +1,6 @@
 {
   "name": "atmina",
-  "version": "0.280.0",
+  "version": "0.281.0",
   "description": "Atmina shared memory. Recall before answering from training; capture decisions and findings; update existing memory; consolidate a knowledge base into a reviewed current-state view.",
   "author": {
     "name": "Latent Minds"
