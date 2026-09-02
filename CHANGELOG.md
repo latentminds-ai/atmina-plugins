@@ -1,5 +1,19 @@
 # Changelog
 
+## v0.282.4
+
+Release v0.282.4
+Compare: https://github.com/latentminds-ai/atmina-mono/compare/v0.282.3...v0.282.4
+
+⚠ Breaking changes:
+- fix(auth)!: key the Delegated Grant on (family, client), not family alone (LAT-1463) (c3910289)
+
+Bug fixes:
+- fix(auth)!: key the Delegated Grant on (family, client), not family alone (LAT-1463) (c3910289)
+
+Other:
+- docs(site): curate the public release note for v0.282.4 (LAT-1463) (da7dee9b)
+
 ## v0.282.3
 
 Release v0.282.3
