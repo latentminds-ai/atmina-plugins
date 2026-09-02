@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.283.1
+
+- feat(plugins): prove the published artifact from outside the publish job
+
 ## v0.283.0
 
 No plugin changes; republished for Atmina v0.283.0.
