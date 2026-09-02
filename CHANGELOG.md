@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.282.5
+
+Release v0.282.5
+Compare: https://github.com/latentminds-ai/atmina-mono/compare/v0.282.4...v0.282.5
+
+Other:
+- chore(auth): quieten the compat logging, keep the failure line (LAT-1463) (5de21ee9)
+
 ## v0.282.4
 
 Release v0.282.4
