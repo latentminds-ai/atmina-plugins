@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.283.0
+
+No plugin changes; republished for Atmina v0.283.0.
+
 ## v0.282.8
 
 - feat(plugins): retire "Total Recall", backfill the missing changelog entry, name the Windows limit
