@@ -8,7 +8,7 @@
     {
       "name": "atmina",
       "source": "./plugins/atmina-cursor",
-      "version": "0.286.0",
+      "version": "0.287.0",
       "description": "Atmina shared memory. Recall before answering from training; capture decisions and findings; update existing memory; consolidate a knowledge base into a reviewed current-state view.",
       "logo": "assets/logo.svg"
     }
