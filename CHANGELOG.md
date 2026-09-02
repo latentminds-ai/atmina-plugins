@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.282.3
+
+Release v0.282.3
+Compare: https://github.com/latentminds-ai/atmina-mono/compare/v0.282.2...v0.282.3
+
+Features:
+- feat(auth): log the error a failed token exchange returned (LAT-1463) (dce57ae0)
+
 ## v0.282.2
 
 Release v0.282.2
