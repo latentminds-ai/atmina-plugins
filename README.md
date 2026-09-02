@@ -1,6 +1,6 @@
 # Atmina plugins
 
-*Memory, Shared. Total Recall.*
+*Memory, shared.*
 
 Atmina is shared memory for coding agents. An agent forgets between sessions
 and its context thins within one; Atmina is where the decisions, findings and
@@ -67,6 +67,12 @@ number. They live in the plugin data directory your editor provides
 temporary directory. They are never transmitted.
 
 Cursor gets orientation only, as an inline command, and ships no scripts.
+
+**On Windows**, the hooks need Git Bash on your machine — your editor runs them
+through it. Without Git Bash the hooks do not run; nothing else about the
+plugin is affected, and the MCP connection works normally. We have not yet
+verified the hooks on a Windows install, so treat Windows hook support as
+unproven rather than promised.
 
 ## Versioning
 

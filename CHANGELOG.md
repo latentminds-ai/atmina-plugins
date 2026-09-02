@@ -1,8 +1,17 @@
 # Changelog
 
+## v0.282.8
+
+- feat(plugins): retire "Total Recall", backfill the missing changelog entry, name the Windows limit
+
 ## v0.282.7
 
 - fix(plugins): gate the changelog entry we write, not the history we inherit
+
+## v0.282.6
+
+- feat(plugins): license the public repo, scrub internal references, ship real releases
+- fix(plugins): run bundled hooks through sh so a 644 checkout still fires
 
 ## v0.282.5
 
