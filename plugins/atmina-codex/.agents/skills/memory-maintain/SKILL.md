@@ -3,6 +3,7 @@ name: memory-maintain
 description: Runs an out-of-band report-only maintain pass over an Atmina Knowledge Base — idle-gated, proposing same-intent merges and claim repairs, flagging contradictions and stale_after, archiving obsolete pages to KB-root archive/ when they are not cited as in-KB evidence, proposing linkify of bare catalog paths, reporting durable pages that have never been recalled alongside broken references and unconnected pages (each count stating the scope it covered), and writing a short trail in chronicle/. Use when an operator asks to maintain memory, repair claims, archive obsolete knowledge, linkify wiki paths, review recall or link health, or run an attestation sweep — never during an in-band user task, and never as a task's finally.
 metadata:
   pack: atmina-memory
+license: Apache-2.0
 ---
 
 # Maintain organisational memory (report-only)
@@ -19,7 +20,7 @@ out-of-band report-only maintain pass."
 
 Type and pin authority is
 [`docs/agents/atmina-memory-evidence.md`](../../../docs/agents/atmina-memory-evidence.md)
-(W0-1). This skill **imports** that binding. It does not re-define the taught
+This skill **imports** that binding. It does not re-define the taught
 catalogue, the pin recipe, the `[@id]` marker/link bijection, or
 `unattested`. Audience is business / organisational. Pins are Atmina
 `pinned_version` + `span_sha256`.

@@ -4,6 +4,7 @@ description: Records working-layer notes and end-of-task session notes (offered 
  Org default is chronicle/YYYY-MM-DD-<slug>.md; personal or single-agent scope may use journal/ or one durable file; never writes wiki/, compiled views, or source mirrors. A session note is an index of the task, what was gathered, what was decided, and wiki paths and system-of-record locators — not a transcript. Gathering sources is not a durable write. Nothing notable is a successful no-op. Use when mid-task candidates or a session note need to land in the working layer, or when an agent would otherwise save a brief, finding, or transcript into the wiki.
 metadata:
   pack: atmina-memory
+license: Apache-2.0
 ---
 
 # Observe: write the working layer, never the wiki

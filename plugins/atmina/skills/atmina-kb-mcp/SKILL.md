@@ -1,6 +1,7 @@
 ---
 name: atmina-kb-mcp
 description: Use when connected to the Atmina MCP server — your shared memory. Recall (search) before answering from training; capture decisions/findings; update existing memory; consolidate a KB's memory into a reviewed current-state view. Covers orientation, file writes/uploads, search, audit, and the run→review→promote routine loop.
+license: Apache-2.0
 ---
 
 # Atmina — your memory

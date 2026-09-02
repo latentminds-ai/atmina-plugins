@@ -103,8 +103,8 @@ Not doing: sending the renewal; not substituting a neighbouring facts page
 To continue: someone reads what wiki/facts/renewal-terms.md now says at head and decides whether the procedure still holds; the record is then re-pinned or corrected
 ```
 
-Do not re-interpret `drifted` as attested. LAT-1867 shipped; a drifted
-verdict is about the cited span.
+Do not re-interpret `drifted` as attested. A drifted verdict is about the
+cited span.
 
 ## The same incident, with no locator at all
 

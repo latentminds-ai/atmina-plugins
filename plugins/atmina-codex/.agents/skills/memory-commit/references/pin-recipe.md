@@ -6,7 +6,7 @@ assumes the earlier ones.
 
 Type and pin authority is
 [`docs/agents/atmina-memory-evidence.md`](../../../../docs/agents/atmina-memory-evidence.md)
-(W0-1). This recipe **imports** that binding. It does not re-define the
+This recipe **imports** that binding. It does not re-define the
 taught catalogue and does not invent a second hash.
 
 Tools used, with the arguments they take:
@@ -74,7 +74,7 @@ go back to step 3.
 Follow this literally on the `content` string a `read_file` returned. Do not
 strip frontmatter, do not trim, do not normalise anything the steps do not
 name. Line numbers count from the first line of the stored file, which is the
-opening `---` of the frontmatter when the file has one. This is W0-1 §5.2.
+opening `---` of the frontmatter when the file has one. This is the evidence convention §5.2.
 
 1. Replace every `\r\n` with `\n`. Then replace every remaining `\r` with
    `\n`.
@@ -92,7 +92,7 @@ opening `---` of the frontmatter when the file has one. This is W0-1 §5.2.
 8. Write the digest as 64 lowercase hexadecimal characters. Compare that string
    to `span_sha256` exactly.
 
-Check yourself against W0-1's worked example. The byte fixture (algorithm
+Check yourself against the evidence convention's worked example. The byte fixture (algorithm
 test, not this pack's folder tree) is
 `docs/agents/scoped-wiki-evidence-example/wiki/guides/run-the-ingest-pipeline.md`.
 Stored lines 29–33 (the five numbered steps, counted from the opening `---` as
@@ -116,13 +116,13 @@ required; the order is conventional:
     note: The run procedure, pinned at the version read on 2026-08-26; the span is its five numbered steps.
 ```
 
-The `path` here is the W0-1 byte fixture (algorithm test), not this pack's
+The `path` here is the the evidence convention byte fixture (algorithm test), not this pack's
 primitive tree. A live Commit cites a page under `wiki/decisions/` /
 `wiki/procedures/` / `wiki/facts/` / `wiki/preferences/` /
 `wiki/relationships/` / `wiki/open-questions/` the same way.
 
 - `id`: lowercase kebab-case, unique on the page. `Run_Procedure` is dropped.
-- `type`: a name from W0-1 §2. In-KB and pinnable, taught: `wiki-page` only.
+- `type`: a name from the evidence convention §2. In-KB and pinnable, taught: `wiki-page` only.
 - `path`: the target's KB path **without** the leading `wiki/`. No leading
   `/`, no `..`, no leading `wiki/`. Never a `chronicle/` path.
 - `pinned_version`: the `version_n` from step 2.2, as a bare integer. `"3"` in
@@ -156,7 +156,7 @@ working copy. [@run-procedure] The pinned span is
 
 Two claims resting on different spans of one page are two entries, two ids,
 two markers, two links. The link nearest after each marker is that marker's.
-The binding key is the `[@id]` marker (LAT-1861 / W0-1 §4), not the link
+The binding key is the `[@id]` marker (evidence convention §4), not the link
 target alone.
 
 A `wiki-page` entry with a pin and no span link is a claim about the whole
@@ -173,7 +173,7 @@ is about the page as a whole. Span ⇒ pin.
     note: CRM account A-104 renewal dates as retrieved 2026-08-27. Outside Atmina, so it is recorded rather than resolved.
 ```
 
-- `type` is a taught external name from W0-1 §2 (`official-document`,
+- `type` is a taught external name from the evidence convention §2 (`official-document`,
   `system-record`, `communication`, `regulatory-instrument`,
   `person-attestation`, `absence`, `measurement`, `dataset-slice`,
   `prior-version`, `derivation`). This skill does not add names.
@@ -257,8 +257,8 @@ head. It is never a pin for any claim.
 ## Step 9 — Read it back
 
 Now [self-check.md](self-check.md), without exception. A write you did not
-read back is a write you cannot say survived. Do not skip because LAT-1881
-might land.
+read back is a write you cannot say survived. Do not skip it because a
+write-path diagnostic might land later.
 
 ## Worked bytes — hash proof
 
@@ -277,7 +277,8 @@ at the taught span, stored lines 29–33:
 Joined with `\n`, no trailing newline, SHA-256:
 `3dfdc8048075493d73397656cae586469b9f320660b2e9d162e3463fa4ceca3d`.
 
-That digest is the one LAT-1886 already gates. Do not invent a second hash.
+That digest is the one the worked example records. Do not invent a second
+hash.
 
 ## Worked bytes — a durable Commit page
 

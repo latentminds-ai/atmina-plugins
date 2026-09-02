@@ -2,7 +2,7 @@
 
 Folded into this skill so the pack is self-contained. Type catalogue, pin
 recipe, and `[@id]` marker/link binding are **not** redefined here — they
-are `docs/agents/atmina-memory-evidence.md` (W0-1).
+are `docs/agents/atmina-memory-evidence.md`.
 
 A claim is a sentence that asserts something about an artifact outside the
 sentence: where a contract lives, which record to update, what a procedure
@@ -90,7 +90,7 @@ STOP, `unresolved — marker \`[@<id>]\` has no evidence entry`. Record the
 
 ### Step 3 — Classify
 
-Taught types are W0-1 §2 only. In-KB and pinnable, taught: `wiki-page`.
+Taught types are the evidence convention §2 only. In-KB and pinnable, taught: `wiki-page`.
 Every other taught type is external (recorded, not verified by Atmina).
 `unattested` has no locator fields at all.
 
@@ -100,16 +100,16 @@ Every other taught type is external (recorded, not verified by Atmina).
 | `type: wiki-page` with `path: <p>` | **in-KB** | KB path is `wiki/<p>`, or any live path ending in `/wiki/<p>`. Reject `<p>` if it starts with `/`, contains `..`, or contains `\` — that is **absent**. Go to step 4. |
 | a taught external type (`official-document`, `system-record`, `communication`, `regulatory-instrument`, `person-attestation`, `absence`, `measurement`, `dataset-slice`, `prior-version`, `derivation`) or a `url` | **external** | Go to step 6 with the `url` or other address the entry carries. |
 
-Unknown type names are valid bytes (generic pill until LAT-1878). Treat an
+Unknown type names are valid bytes and render as a generic pill. Treat an
 unknown type with a `path` that looks wiki-relative as in-KB only when the
 entry is actually `wiki-page`; otherwise treat it as external and resolve
-the recorded address. Do not wait on LAT-1878.
+the recorded address.
 
 To confirm an in-KB path, `list_files({ kb_id, path_prefix: "wiki/" })` or
 `read_file` on it. Nothing matches → STOP,
 `unresolved — \`<KB path>\` does not exist in this KB`.
 
-`wiki-page` locators resolve only under `wiki/` (W0-1 §8). A `wiki-page`
+`wiki-page` locators resolve only under `wiki/` (the evidence convention §8). A `wiki-page`
 `path` of `chronicle/…` looks up `wiki/chronicle/…` and comes back
 unresolved.
 
@@ -119,13 +119,13 @@ Pinned only when the entry carries **both** `pinned_version` (positive
 integer, not a quoted string) and `span_sha256` (64 lowercase hex). One
 without the other is no pin.
 
-The span is bound **by the `[@id]` marker** (W0-1 §4): starting at the
+The span is bound **by the `[@id]` marker** (the evidence convention §4): starting at the
 marker, the **nearest following** body markdown link
 `[label](target#Ln)` or `[label](target#Ln-Lm)` whose target — fragment
 removed, resolved relative to the citing page — is the entry's target
 file. Skip links inside code spans and fenced blocks. A heading-anchor
-fragment or a bare `#L…` is not a span. LAT-1867 shipped: page-relative
-targets such as `../facts/x.md#L12-L14` resolve on the read path.
+fragment or a bare `#L…` is not a span. Page-relative targets such as
+`../facts/x.md#L12-L14` resolve on the read path.
 
 | Pin | Span | Do |
 | --- | --- | --- |
@@ -191,7 +191,7 @@ Then step 7.
 
 - It **reads** a verdict from `attestation` when present.
 - It **computes** the manual check: entry lookup, span-link binding as in
-  W0-1 §4, `file_history`, `read_file` at the pinned version, the W0-1 §5.2
+  the evidence convention §4, `file_history`, `read_file` at the pinned version, the the evidence convention §5.2
   hash, the head comparison, and the claim-versus-text comparison.
 - It **does not** validate a page, repair a record, or write anything.
 - It **does not** teach another pack's type names as this pack's catalogue.

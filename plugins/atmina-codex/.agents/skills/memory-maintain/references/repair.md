@@ -8,12 +8,12 @@ unresolvable.
 Type, pin recipe, marker/link binding, silent-drop cliffs, and attestation
 states are defined in
 [`docs/agents/atmina-memory-evidence.md`](../../../../docs/agents/atmina-memory-evidence.md)
-(W0-1). **Import** that file. Do not re-state the catalogue or invent a
-second hash. Apply W0-1 §5.2 to bytes a `read_file` returned. Apply W0-1
-§4 for which body link is the span. Apply W0-1 §9 for `attested` /
+**Import** that file. Do not re-state the catalogue or invent a
+second hash. Apply the evidence convention §5.2 to bytes a `read_file` returned. Apply the evidence convention
+§4 for which body link is the span. Apply the evidence convention §9 for `attested` /
 `drifted` / `unresolved` / `external`.
 
-ADR 0038 ruling 2 / D-A7: auto-repoint **proposal** solely on exact content
+Auto-repoint is a **proposal** made solely on an exact content
 match at a new offset; otherwise flag. Never silently reword a claim.
 `applyReviewedRepairs` is REST, admin-on-KB, **not** an MCP tool — never
 call it. The report is the staging area. Do **not** write `_staged/`.
@@ -24,7 +24,7 @@ call it. The report is the staging area. Do **not** write `_staged/`.
    not `search`. Durable claims live under `wiki/`.
 2. For each evidence-carrying page, `read_file` at head. If the response
    carries `attestation`, use those states. Missing block → check the
-   entry yourself with W0-1 (locator, pin, span). A missing `state` is
+   entry yourself with the evidence convention (locator, pin, span). A missing `state` is
    not a pass.
 3. Skip `chronicle/`, compiled views, and non-wiki paths as truth.
 
@@ -49,12 +49,12 @@ hashes to `span_sha256`).** Attempt an auto-repoint **proposal**:
 1. `file_history` on the target. If `pinned_version` is below
    `oldest_retained` or absent from `versions[]`, the pin is gone —
    flag `unresolved` (pruned). Do not invent bytes.
-2. `read_file` the target at `version: <pinned_version>`. Apply W0-1
+2. `read_file` the target at `version: <pinned_version>`. Apply the evidence convention
    §5.1 / §5.2 to the span the `[@id]` marker binds (nearest following
    body link whose resolved target matches). Keep those exact span
    bytes.
 3. `read_file` the target at head (no `version`). Split stored lines
-   the same way (W0-1 §5.1).
+   the same way (the evidence convention §5.1).
 4. Find a contiguous head range whose joined bytes are **byte-identical**
    to the pinned span (same UTF-8, no trim, no restyle).
 5. **Exactly one match at a new offset** → propose re-pointing the span
@@ -79,7 +79,7 @@ explicit in-band Commit applies them.
 
 ## Never
 
-- Silently reword a claim (D-A7 / ADR 0038 ruling 2).
+- Silently reword a claim.
 - Call REST `applyReviewedRepairs`.
 - Write `_staged/`.
 - Write a live evidence entry, span link, or claim body.

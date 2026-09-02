@@ -1,0 +1,38 @@
+name: Bug report
+description: Something in the plugin, its skills, or its hooks is broken.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This repository is generated. Please describe the problem rather than
+        opening a pull request — we fix it at the source and republish.
+
+        **Do not paste Knowledge Base content, tokens, or personal data.**
+        Issues here are public. For anything account-specific, email
+        support@atmina.ai instead.
+  - type: dropdown
+    id: harness
+    attributes:
+      label: Editor
+      options: [Claude Code, Cursor, Codex, Other]
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Plugin version
+      description: The version shown by your editor's plugin list.
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you expected, what happened instead, and any error text.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce

@@ -1,6 +1,6 @@
 # Propose-only linkify
 
-W0-1 §7 item 11: every wiki-to-wiki reference is a markdown link or an
+the evidence convention §7 item 11: every wiki-to-wiki reference is a markdown link or an
 evidence entry — never a bare path in prose or inline code. Bare paths
 render as text and do not traverse. Documents never embed app or
 published URL schemes; friendly slugs are a render-time projection, not
@@ -31,7 +31,7 @@ opens it:
 - from `wiki/reference/` to `wiki/guides/run.md` → `../guides/run.md`
 - same directory → `sibling.md`
 
-Span links (when the mention is a citation) still follow W0-1: filename
+Span links (when the mention is a citation) still follow the evidence convention: filename
 then `#Ln-Lm`, **after** the `[@id]` marker. A bare `#L…` is classified
 external and opens nothing.
 

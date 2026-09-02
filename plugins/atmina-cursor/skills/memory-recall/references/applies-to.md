@@ -1,6 +1,6 @@
 # Applies-to match — exhaustive `list_files`, not `search`
 
-Step 2 of recall. ADR 0048: `list_files` is exhaustive over the catalog;
+Step 2 of recall. `list_files` is exhaustive over the catalog;
 `search` filters only a relevance-candidate window and reports
 `coverage: "relevance_candidates"`, `exhaustive: false`. Applies-to is a
 deterministic match. Implementing it as `search` with a filter is a bug.

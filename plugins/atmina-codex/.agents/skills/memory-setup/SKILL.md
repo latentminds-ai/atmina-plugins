@@ -1,7 +1,7 @@
 ---
 name: memory-setup
 description: Seeds an organisation Knowledge Base with the atmina-memory layout — directory-card pages for the six durable primitives, a Chronicle working-layer card, a wiki home, a kb-profile at wiki root (intensity default middle), and a schema-2 wiki/nav.yaml whose first section is a hand-curated Start here. Registers applies_to as a scalar string pointer when the caller is owning-team admin. Use when standing up a new organisational wiki, seeding an empty Knowledge Base for the atmina-memory pack, or inserting a missing Start here section without overwriting durable pages.
-license: MIT
+license: Apache-2.0
 compatibility: Requires Atmina MCP tools whoami, list_kbs, get_context, write_file, write_files, generate_nav, update_kb, and list_files.
 metadata:
   pack: atmina-memory

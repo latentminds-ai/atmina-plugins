@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/orient.sh"
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/orient.sh\""
           }
         ]
       }
@@ -17,7 +17,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/record-write.sh"
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/record-write.sh\""
           }
         ]
       }
@@ -27,7 +27,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/record-compaction.sh"
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/record-compaction.sh\""
           }
         ]
       }
@@ -37,7 +37,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/nudge.sh"
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/nudge.sh\""
           }
         ]
       }

@@ -97,8 +97,8 @@ contract lives, what a procedure requires, which record to update):
 `evaluated: false` or missing `attestation` → manual check, **never a pass**.
 No evidence entry → unverified; say so and ask.
 
-Do not re-request computed states. LAT-1849 already ships them on a head
-read of an evidence-carrying wiki page. A version read and a non-evidence
+Do not re-request computed states. The product already returns them on a
+head read of an evidence-carrying wiki page. A version read and a non-evidence
 page carry no block.
 
 ## 6. No writes

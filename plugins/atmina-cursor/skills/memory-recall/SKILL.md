@@ -3,6 +3,7 @@ name: memory-recall
 description: Recalls durable Atmina memory with verify-before-act. Orients, matches applies_to via exhaustive list_files (not search), searches wiki/ with recency boosts, reads the smallest set, and verifies artifact claims on the computed attestation block before acting — never substituting a near match, never writing memory. Use when recalling, looking up, or acting on a decision, procedure, fact, preference, relationship, or open question already on file in an Atmina Knowledge Base, or when the user asks to remember, look up, or bring them up to speed.
 metadata:
   pack: atmina-memory
+license: Apache-2.0
 ---
 
 # Recall durable memory, then verify before acting

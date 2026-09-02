@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Account, billing, or data questions
+    url: https://atmina.ai
+    about: Anything account-specific. Issues here are public; please email support@atmina.ai.
+  - name: Security vulnerability
+    url: https://atmina.ai
+    about: Do not open an issue. Email security@atmina.ai — see SECURITY.md.
+  - name: Feature requests
+    url: https://atmina.ai
+    about: Tell us what you need at support@atmina.ai; this repository only tracks defects in the published artifacts.

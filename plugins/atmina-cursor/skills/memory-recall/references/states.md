@@ -5,8 +5,8 @@ Imported from `docs/agents/atmina-memory-evidence.md` §9. That section
 not treat a second table here as a second authority.
 
 Read this when a `read_file` response carries an `attestation` key.
-LAT-1849 already ships the block on a head read of an evidence-carrying
-wiki page. Do not re-request computed states. A version read and a
+The product returns the block on a head read of an evidence-carrying wiki
+page. Do not re-request computed states. A version read and a
 non-evidence page carry no block.
 
 ## The shape on the wire
@@ -30,7 +30,7 @@ non-evidence page carry no block.
 - `truncated: true` means at least one entry was not evaluated. Say so
   whenever it is true, even if your own entry was evaluated.
 
-## Follow-through (meanings as in W0-1 §9)
+## Follow-through (meanings as in the evidence convention §9)
 
 | `state` | Do |
 | --- | --- |

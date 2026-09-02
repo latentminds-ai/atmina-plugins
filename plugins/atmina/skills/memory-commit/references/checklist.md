@@ -31,7 +31,7 @@ Convention reference:
 | --- | --- | --- |
 | 11 | Every entry has `id`, and the id matches `^[a-z0-9]+(?:-[a-z0-9]+)*$`. Lowercase, digits, single hyphens. | **2** — a malformed id is dropped for its shape alone. |
 | 12 | No two entries share an `id`. | **2** — the first wins; the later one is discarded, and the marker cites bytes nobody wrote. |
-| 13 | Every entry has a non-empty `type` from W0-1 §2. | **2** |
+| 13 | Every entry has a non-empty `type` from the evidence convention §2. | **2** |
 | 14 | Every entry has a non-empty `note`. | **2** |
 | 15 | Every `url` is absolute `https://`, with no `user:pass@` in it, and parses as a URL. | **3** — the field is dropped, the entry survives, and the citation names nothing. |
 | 16 | No entry carries `content_sha256`. `content_sha256` is a `write_file` argument (a whole-body transport check), never an evidence-entry field.

@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.282.7
+
+- fix(plugins): gate the changelog entry we write, not the history we inherit
+
 ## v0.282.5
 
 Release v0.282.5

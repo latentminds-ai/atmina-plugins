@@ -3,8 +3,8 @@
 Run this after **every** write that carries a claim — `write_file`,
 `write_files` (once per page). There is no server-side validation; a
 malformed record is dropped on read with no error anywhere. This is the only
-thing that will tell you the record exists. LAT-1881 (write-path diagnostics)
-is an optional parallel; do not skip this because it might land.
+thing that will tell you the record exists. Do not skip it because a
+write-path diagnostic might land later.
 
 Inputs: the `kb_id`, the page `path`, and the `etag` and `version_n` the
 write returned. The write response field is `version_n`, not `version`.
@@ -41,7 +41,7 @@ not over what you meant to send. In particular, from the bytes:
    2; that is a different document); `title` and `summary` are non-empty
    strings; `source`, `observed`, and `status` are present; no key repeats.
 3. List every entry under `evidence:` that has an `id` of the right shape, a
-   `type` from W0-1 §2, and a `note`. **Every entry you intended is in that
+   `type` from the evidence convention §2, and a `note`. **Every entry you intended is in that
    list**, with the fields you wrote — `pinned_version` an integer,
    `span_sha256` 64 hex, `url` an `https` URL, an `unattested` entry with no
    locator. No `wiki-page` path is a chronicle path.
@@ -64,7 +64,7 @@ whether the product "still accepts it".
 If the response carries `attestation`, find the row whose `evidence_id` is
 each entry you wrote and compare it with this table. This is what the read
 path computed from the bytes you just re-parsed; it is the last word on
-whether the record binds. States are W0-1 §9.
+whether the record binds. States are the evidence convention §9.
 
 | You wrote | Required row |
 | --- | --- |
@@ -136,4 +136,4 @@ without asking you anything.
 - It does not undo a malformed write. A STOP leaves the page as written;
   the fix is a corrected `overwrite` with `if_match`, followed by this
   procedure again.
-- It does not wait on LAT-1881.
+- It does not wait on a future write-path diagnostic.

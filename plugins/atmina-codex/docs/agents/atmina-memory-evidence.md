@@ -1,18 +1,17 @@
 # The atmina-memory pack's evidence convention
 
-**Status:** binding for the atmina-memory skills pack (LAT-1880 Wave 0).
-Written for slice W0-1 ([LAT-1886](https://linear.app/latent-minds/issue/LAT-1886)).
+**Status:** binding for the atmina-memory skills pack.
 
-**This file DEFINES the pack's writer/reader binding.** Later Wave 0 slices
+**This file DEFINES the pack's writer/reader binding.** The pack's skills
 **import** it and must not re-define the catalogue, the pin recipe, the
 `[@id]` marker/link bijection, the silent-drop cliffs, the `unattested` row,
 link discipline, or `version_n`:
 
-- W0-4 `memory-recall` (reader / verify) imports this binding
-- W0-5 `memory-commit` (writer / pin + read-back) imports this binding
-- W0-6 `memory-maintain` (repair proposals) imports this binding
+- `memory-recall` (reader / verify) imports this binding
+- `memory-commit` (writer / pin + read-back) imports this binding
+- `memory-maintain` (repair proposals) imports this binding
 
-When two slices build the halves of a contract, one DEFINES and the others
+When two skills build the halves of a contract, one DEFINES and the others
 import. Never both.
 
 **Audience:** a business / organisational Knowledge Base. Systems of record are
@@ -21,18 +20,8 @@ are Atmina `pinned_version` + `span_sha256`. This file does not teach git,
 default branches, commit hashes as the way to pin, repositories, or pull
 requests as a required evidence type.
 
-**Bound by, in this order:**
-
-1. Wave 0 bounds in `docs/plans/2026-08-27-atmina-memory-pack-wave0.md`
-   (grill closures G1, G11, G12).
-2. `docs/notes/2026-09-27-memory-system-design-v2.md` and LAT-1880's settled
-   decisions — not re-openable.
-3. Decision log D-A2 / D-A3 / D-A4 / D-A7 / D-A8; ADR 0038 ruling 2; ADR 0048.
-
-Do not rewrite `docs/agents/scoped-wiki-evidence.md` in place. That file is
-LAT-1833's binding catalogue. Two pack conventions are the cost G-4 already
-accepted. "No third vocabulary" means **this pack teaches the catalogue in
-§2 only**.
+**One vocabulary.** This pack teaches the evidence catalogue in §2 and
+nowhere else. Do not introduce a second set of type names alongside it.
 
 The pin-recipe hash proof may keep using
 `docs/agents/scoped-wiki-evidence-example/` as a **byte fixture** (algorithm
@@ -49,7 +38,7 @@ claim: **what does this rest on, and can I still reach it?** An agent writing
 must leave that question answerable.
 
 This document defines the bytes that make that possible. It does not define
-skill behaviour — that is W0-2 through W0-6 — and it introduces no product
+skill behaviour — that is each skill's own file — and it introduces no product
 change. Everything here is writable today through `write_file` /
 `write_files` / `update_file`.
 
@@ -179,8 +168,7 @@ enforce this.
 ## 4. One entry, one span — bound by the marker
 
 The span rides in the body; the pin rides in frontmatter. They are bound
-together **by the `[@id]` marker**, not by the link's target
-([LAT-1861](https://linear.app/latent-minds/issue/LAT-1861)).
+together **by the `[@id]` marker**, not by the link's target.
 
 > For an entry with id `X`, its span is the **nearest body markdown link
 > following the `[@X]` marker, in document order, whose resolved target is
@@ -206,14 +194,12 @@ A link that comes **before** every marker of its entry binds to nothing.
 `path` is wiki-relative (`guides/run.md` → `wiki/guides/run.md`); `..` and a
 leading `/` on that field are rejected. The span link is a Markdown link: it
 resolves **relative to the citing page's directory**, the way the viewer
-opens it. [LAT-1867](https://linear.app/latent-minds/issue/LAT-1867) **shipped**
-(`a5ddb5bd`, v0.256.0). Page-relative span links are **not** an open product
-bug. Write `../guides/x.md#L29-L33` from `wiki/reference/` and the read path
-projects the span, the same way the viewer does.
+opens it. Page-relative span links are supported: write
+`../guides/x.md#L29-L33` from `wiki/reference/` and the read path projects
+the span, the same way the viewer does.
 
-The binding is asserted by code: `packages/evidence/src/span-link.ts` ›
-`spanForEvidenceEntry`. If this section and that module disagree, the module
-is what the read path does.
+Where this section and the live read path ever disagree, the read path is
+what actually happens.
 
 ### 4.1 A span requires a pin
 
@@ -251,8 +237,7 @@ Asserted by `@atmina/kb-view/source-span` › `splitSourceLines`.
 > with **no trailing newline**. Hash the UTF-8 bytes with SHA-256 and write
 > the digest as **64 lowercase hex characters**.
 
-Asserted by `packages/evidence/src/span-hash.ts` › `hashEvidenceSpan`. A
-range that runs past the end of the file hashes to nothing (`null`), never
+A range that runs past the end of the file hashes to nothing (`null`), never
 to the lines that survive — that is why a truncated target reads as
 `drifted` rather than falsely attesting.
 
@@ -289,9 +274,9 @@ work, not this pack.
 
 There is no server-side validation. The write path accepts whatever bytes
 you send. A malformed record is dropped **on read**. Write → read-back →
-re-parse is mandatory for every durable write. LAT-1881 (write-path
-diagnostics) is an optional parallel; do not skip read-back because it
-might land.
+re-parse is mandatory for every durable write. Do not skip read-back on the
+expectation that a future write-path diagnostic might catch the problem for
+you.
 
 ### Cliff 1 — missing `schema: 1`, `title`, or `summary` yields no evidence at all
 
@@ -385,9 +370,8 @@ The v2 spec's §18 example that cites a chronicle session note as
 
 A head `read_file` of an evidence-carrying wiki page returns
 `attestation.entries[]` with `evaluated` / `state`, plus `truncated` and
-`resolution_bound`. [LAT-1849](https://linear.app/latent-minds/issue/LAT-1849)
-already ships this. Do not re-request it. Version reads and non-evidence
-pages carry **no** block.
+`resolution_bound`. The product already computes this; do not re-request it.
+Version reads and non-evidence pages carry **no** block.
 
 | `state` | Meaning | Do |
 | --- | --- | --- |
@@ -411,9 +395,8 @@ Never treat a missing `state`, a missing block, or a missing entry as
 `attested`. Never substitute a nearby artefact when the locator does not
 resolve.
 
-[LAT-1867](https://linear.app/latent-minds/issue/LAT-1867) is **not** an open
-product bug. Do not copy the stale "known gap" paragraph that said
-page-relative span links project whole-file.
+Page-relative span links are **not** an open product bug. Ignore any older
+note claiming they project whole-file.
 
 ---
 
@@ -451,7 +434,7 @@ Not required on every page. Use when they add information:
 - `verified:` — optional confirmation events.
 - `stale_after:` — absolute date; Maintain lists it for re-confirmation; it
   is not a deletion.
-- `applies_to:` — **one scalar string** per durable page (ADR 0048 has no
+- `applies_to:` — **one scalar string** per durable page (there is no
   array traversal). Setup registers `/applies_to` as a queryable string
   pointer. A list in this field rejects the write once registered as string.
 - Actor format when naming who wrote or confirmed: `human:`, `process:`,
@@ -463,16 +446,14 @@ Not required on every page. Use when they add information:
 
 Closed for this pack:
 
-- Minimum provenance, typed evidence (D-A8), unlocated claims as
-  `unattested`, marker-anchored span binding (LAT-1861), page-relative span
-  links (LAT-1867), computed states on `read_file` (LAT-1849), `span_sha256`
-  recipe asserted by `hashEvidenceSpan`.
+- Minimum provenance, typed evidence, unlocated claims as `unattested`,
+  marker-anchored span binding, page-relative span links, computed states on
+  `read_file`, and the `span_sha256` recipe.
 
 Still the pack's problem, not a reason to grow the model:
 
 - **Nothing validates a durable page on write.** Read-back is the check.
 - **Pins age out after 20 later writes.** Repair proposes; a human applies.
-- **The worked-example hash has a CI gate in this repository** (LAT-1886):
-  `packages/evidence/test/atmina-memory-worked-example-hash.test.ts`. Edit
-  the cited fixture's lines 29–33 and that test goes red. Re-run the §5.2
-  recipe after any such edit.
+- **The worked example's digest is tied to the fixture it cites.** Edit the
+  cited fixture's lines 29–33 and the recorded digest is wrong. Re-run the
+  §5.2 recipe after any such edit.

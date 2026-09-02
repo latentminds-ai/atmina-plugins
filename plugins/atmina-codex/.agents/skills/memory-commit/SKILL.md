@@ -3,14 +3,16 @@ name: memory-commit
 description: Promotes working-layer notes into durable Atmina wiki primitives with typed evidence, pins in-KB spans, marks unlocated claims unattested, and reads the page back to prove the record survived. Use when committing a decision, fact, procedure, preference, relationship, or open question through write_file or write_files, including after a user correction, a surprising durable lesson, or a decision settled with a stated reason.
 metadata:
   pack: atmina-memory
+license: Apache-2.0
 ---
 
 # Commit durable memory: pin what you can, then prove the write survived
 
 Type and pin authority is
 [`docs/agents/atmina-memory-evidence.md`](../../../docs/agents/atmina-memory-evidence.md)
-(W0-1). This skill **imports** that binding. It does not re-define the taught
-catalogue, invent a second pin recipe, or wait on LAT-1881. Nothing in the
+This skill **imports** that binding. It does not re-define the taught
+catalogue, invent a second pin recipe, or wait on a future write-path
+diagnostic. Nothing in the
 product validates a word of this on write: a malformed record is dropped on
 read, silently, and the page looks right.
 
@@ -33,7 +35,7 @@ Only into `wiki/decisions/`, `wiki/procedures/`, `wiki/facts/`,
 
 Every durable page carries `source`, `observed`, and `status` (`confirmed` |
 `inferred` | `unresolved`) plus **at least one** taught typed evidence entry
-from W0-1 §2. Durable pages use evidence `schema: 1`. Wiki menus use `schema:
+from the evidence convention §2. Durable pages use evidence `schema: 1`. Wiki menus use `schema:
 2`. Those integers name different documents — a durable page with `schema: 2`
 yields no evidence at all.
 
@@ -72,8 +74,8 @@ events, `stale_after`, `applies_to` (one scalar string), actor format
 6. **Write** with `write_file` (`create`; or `overwrite` + `if_match`). The
    write response field is `version_n`, not `version`.
 7. **Read it back** — [references/self-check.md](references/self-check.md).
-   Re-parse. STOP if it did not survive. Do not skip because LAT-1881 might
-   land.
+   Re-parse. STOP if it did not survive. Do not skip it because a write-path
+   diagnostic might land later.
 8. **Report** the page path, the new `version_n`, and each entry's read-back
    state. Or STOP.
 
@@ -102,4 +104,5 @@ To continue: <rewrite with the item fixed and run the self-check again | a perso
 - It **reads** a verdict from `attestation` when the read-back carries one.
   No `attestation` block proves only the re-parse; say so.
 - It **does not** verify the claim's truth against the world, repair another
-  writer's record, or apply Maintain proposals. It does not wait on LAT-1881.
+  writer's record, or apply Maintain proposals. It does not wait on a future
+  write-path diagnostic.
