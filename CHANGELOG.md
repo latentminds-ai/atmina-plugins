@@ -1,5 +1,19 @@
 # Changelog
 
+## v0.282.2
+
+Release v0.282.2
+Compare: https://github.com/latentminds-ai/atmina-mono/compare/v0.282.1...v0.282.2
+
+Features:
+- feat(auth): log one line per OAuth loopback-compat decision (LAT-1463) (d2c4846c)
+
+Bug fixes:
+- fix(auth): accept private-use redirect schemes from native clients (LAT-1463) (75f5a564)
+
+Other:
+- docs(site): curate the public release note for v0.282.2 (LAT-1463) (53d97366)
+
 ## v0.282.1
 
 Release v0.282.1
