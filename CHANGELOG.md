@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.297.0
+
+No plugin changes; republished for Atmina v0.297.0.
+
 ## v0.296.0
 
 - feat(plugins): report repository memory engagement
