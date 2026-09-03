@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.295.0
+
+No plugin changes; republished for Atmina v0.295.0.
+
+## v0.294.0
+
+- feat(plugins): a binding may address a whole Knowledge Base
+
+## v0.293.0
+
+No plugin changes; republished for Atmina v0.293.0.
+
 ## v0.292.0
 
 - feat(operating-model): add the repo AGENTS.md block as OM-16 surface five
