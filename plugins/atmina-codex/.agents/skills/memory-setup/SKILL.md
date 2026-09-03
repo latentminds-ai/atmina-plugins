@@ -2,10 +2,10 @@
 name: memory-setup
 description: Seeds an organisation Knowledge Base with the atmina-memory layout — directory-card pages for the six durable primitives, a Chronicle working-layer card, a wiki home, a kb-profile at wiki root (intensity default middle), and a schema-2 wiki/nav.yaml whose first section is a hand-curated Start here. Registers applies_to as a scalar string pointer when the caller is owning-team admin. Use when standing up a new organisational wiki, seeding an empty Knowledge Base for the atmina-memory pack, or inserting a missing Start here section without overwriting durable pages.
 license: Apache-2.0
-compatibility: Requires Atmina MCP tools whoami, list_kbs, get_context, write_file, write_files, generate_nav, update_kb, and list_files.
+compatibility: Requires Atmina MCP tools whoami, list_kbs, get_context, write_file, write_files, generate_nav, update_kb, and list_files. The final binding step also needs local file reads and writes plus git rev-parse, and is skipped loudly when those are unavailable.
 metadata:
   pack: atmina-memory
-allowed-tools: whoami list_kbs get_context write_file write_files generate_nav update_kb list_files
+allowed-tools: whoami list_kbs get_context write_file write_files generate_nav update_kb list_files Read Write Edit Bash(git rev-parse *)
 ---
 
 # Memory setup: seed the organisation layout once
@@ -49,6 +49,13 @@ Follow [references/procedure.md](references/procedure.md). Seed bytes are
    `/stale_after` type `datetime` via `update_kb`. A non-admin skip is **loud,
    not fatal**. `applies_to` is one scalar string per durable page, never a
    list.
+9. Bind the repository, when the operator is working in one. Follow
+   [references/repository-binding.md](references/repository-binding.md): write
+   `.atmina.yaml` at the git toplevel and one marked block in the root agent
+   instructions, so a seeded Knowledge Base is one a session can find. **Show
+   the complete diff and get an explicit yes before writing, and never stage or
+   commit anything.** Not in a git repository, or already bound to this
+   Knowledge Base? Report and skip — loud, not fatal.
 
 ## Never
 
@@ -59,6 +66,9 @@ Follow [references/procedure.md](references/procedure.md). Seed bytes are
   calendars, and ledgers.
 - Fail the whole seed because the pointer registry was skipped.
 - Treat projection `rebuilding` as "no matches".
+- Write a binding without showing the diff first, write a second marked block
+  when one is already there, re-point a repository already bound to a different
+  Knowledge Base, or stage or commit anything at all.
 
 ## Report
 
