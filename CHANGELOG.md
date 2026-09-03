@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.296.0
+
+- feat(plugins): report repository memory engagement
+- test(plugins): assert OM-16 surface B against this repository
+
 ## v0.295.0
 
 No plugin changes; republished for Atmina v0.295.0.
