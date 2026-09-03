@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.292.0
+
+- feat(operating-model): add the repo AGENTS.md block as OM-16 surface five
+- feat(plugins): write the binding and upsert the agents block, fail-closed
+- feat(plugins): orient.sh reads the repo binding, and cannot fall silent
+- feat(plugins): read the repo-local Atmina binding, with three states
+
 ## v0.291.0
 
 No plugin changes; republished for Atmina v0.291.0.
