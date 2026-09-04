@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.299.0
+
+No plugin changes; republished for Atmina v0.299.0.
+
 ## v0.298.0
 
 - fix(plugins): count what the engagement signal claims to count
