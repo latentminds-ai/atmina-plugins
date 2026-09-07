@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.307.1
+
+No plugin changes; republished for Atmina v0.307.1.
+
 ## v0.307.0
 
 No plugin changes; republished for Atmina v0.307.0.
