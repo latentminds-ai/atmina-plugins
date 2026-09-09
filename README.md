@@ -30,10 +30,14 @@ install link. Or add the plugin directory `plugins/atmina-cursor` by hand.
 
 ### Codex
 
-Copy the server block from
-[`plugins/atmina-codex/config.toml`](plugins/atmina-codex/config.toml) into
-your Codex configuration, and the skills from
-`plugins/atmina-codex/.agents/skills/`.
+```sh
+codex plugin marketplace add latentminds-ai/atmina-plugins
+codex plugin add atmina@atmina
+```
+
+This installs the Atmina plugin with its MCP connection, skills, and hooks.
+Complete the browser-based authorization when prompted, then start a new
+Codex task to load the plugin.
 
 ## What you get
 

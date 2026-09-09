@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.309.0
+
+- fix(plugins): show Atmina branding with a transparent icon
+
 ## v0.308.4
 
 No plugin changes; republished for Atmina v0.308.4.

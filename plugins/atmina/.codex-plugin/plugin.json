@@ -1,0 +1,28 @@
+{
+  "name": "atmina",
+  "version": "0.309.0",
+  "description": "Atmina shared memory. Recall before answering from training; capture decisions and findings; update existing memory; consolidate a knowledge base into a reviewed current-state view.",
+  "author": {
+    "name": "Latent Minds"
+  },
+  "license": "Apache-2.0",
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Atmina",
+    "shortDescription": "Shared memory for your agents",
+    "longDescription": "Atmina shared memory. Recall before answering from training; capture decisions and findings; update existing memory; consolidate a knowledge base into a reviewed current-state view.",
+    "developerName": "Latent Minds",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://atmina.ai",
+    "defaultPrompt": [
+      "Recall what my team has already decided about this task."
+    ],
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/icon.png"
+  }
+}
