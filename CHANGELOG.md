@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.323.0
+
+- test(plugins): let eval cases read the skills under test
+- test(plugins): track the memory-observe eval suite
+
 ## v0.322.0
 
 No plugin changes; republished for Atmina v0.322.0.
