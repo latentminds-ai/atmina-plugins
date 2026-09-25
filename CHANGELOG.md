@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.332.0
+
+No plugin changes; republished for Atmina v0.332.0.
+
 ## v0.331.0
 
 - fix(brand): restore public favicons and unify icon generation
