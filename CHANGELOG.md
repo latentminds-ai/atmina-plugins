@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.333.0
+
+- test(plugins): record the two-arm invariant baseline
+- test(plugins): make run-ablation.sh usable outside the primary checkout
+- test(plugins): split invariant scoring from the contested destination
+- test(plugins): close the batch-write hole in the wiki guards
+- test(plugins): make the eval graders provable and the ablation meaningful
+
 ## v0.332.0
 
 No plugin changes; republished for Atmina v0.332.0.
