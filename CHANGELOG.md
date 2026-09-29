@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.334.0
+
+No plugin changes; republished for Atmina v0.334.0.
+
 ## v0.333.0
 
 - test(plugins): record the two-arm invariant baseline

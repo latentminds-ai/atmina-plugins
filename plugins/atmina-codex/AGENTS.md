@@ -1,3 +1,3 @@
-# Atmina v0.333.0
+# Atmina v0.334.0
 
 Orient with `get_context` first. Recall with `search` before answering from training. Capture decisions and findings with `write_file`. When this file and the live MCP surface disagree, the live surface wins.
