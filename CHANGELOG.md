@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.340.0
+
+- fix(plugins): stage executable hooks portably
+
 ## v0.339.0
 
 No plugin changes; republished for Atmina v0.339.0.
