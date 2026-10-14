@@ -267,6 +267,8 @@ Text vs binary: plain UTF-8 (markdown, `.txt`, `.csv`, `.json`, `.yaml`) →
 **always** `write_file` / `write_files`. Binary (PDF, images, audio) →
 `upload_file` / `request_uploads`. Never use `upload_file` to dodge path syntax.
 
+HTML files (requires HTML file support for the team): save one self-contained UTF-8 HTML file as text/html at a .html or .htm path with a descriptive filename, because lists show the filename. Use write_file or write_files for up to 1 MiB, and request_uploads then confirm_uploads for up to 4 MiB. The preview has no network access: inline all CSS and JavaScript (CDN tags such as Tailwind or Chart.js do not load, so write plain CSS and draw charts with inline SVG or canvas) and embed fonts and images as data: URIs. localStorage, sessionStorage and indexedDB throw errors and cookies are unavailable, so keep state in memory. alert, confirm and prompt are ignored, new windows and downloads are blocked, and clipboard access may fail. Forms work only through in-page submit handlers that call preventDefault(). Links within the file (#id) work; links to other pages or files do not open in the preview, so write web addresses as plain text, not as links. Use click handlers rather than javascript: links, and keep steps in page state or # links rather than history.back() or history.go(). Lay the page out for a narrow pane, down to phone width. Share the app_url that write_file, write_files or confirm_uploads returns, so the person can open the file running.
+
 ## Memory routines: the run → review → promote loop
 
 A KB can keep a **compiled current-state view of its own memory** — one reviewed
