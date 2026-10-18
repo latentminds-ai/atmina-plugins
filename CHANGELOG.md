@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.346.0
+
+No plugin changes; republished for Atmina v0.346.0.
+
 ## v0.345.0
 
 - docs(mcp): give the plugin skill the HTML file rule
