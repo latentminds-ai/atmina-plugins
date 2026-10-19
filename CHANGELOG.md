@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.349.0
+
+No plugin changes; republished for Atmina v0.349.0.
+
 ## v0.348.0
 
 - docs(mcp): say the HTML preview does not load resources from other sites
