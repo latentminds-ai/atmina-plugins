@@ -1,5 +1,19 @@
 # Changelog
 
+## v0.347.0
+
+- fix(plugins): validate Grok sessions before cached returns
+- fix(plugins): address Grok Windows hook review and session cleanup
+- fix(plugins): deliver Cursor context before prompts in both windows
+- test(plugins): split Grok lifecycle scenarios within Windows time budget
+- fix(plugins): pass Grok actions portably across POSIX shells
+- feat(plugins): add Grok CLI and Bot setup routes
+- fix(plugins): scope CI and harden Windows dispatch
+- fix(plugins): verify generated client routes and require Windows checks
+- test(plugins): preserve Git Bash runtime PATH on Windows
+- test(plugins): execute launcher fixtures from the workspace
+- fix(plugins): run client hooks on native Windows
+
 ## v0.346.0
 
 No plugin changes; republished for Atmina v0.346.0.

@@ -1,0 +1,11 @@
+schema: 1
+topics:
+  ingest-pipeline:
+    title: Ingest pipeline
+    summary: How the mineralogy ingest pipeline is versioned, run, and verified.
+    parents:
+      - operations
+  operations:
+    title: Operations
+    summary: The durable operational concerns of the corpus this wiki describes.
+    parents: []

@@ -1,2 +1,4 @@
 # Hook scripts are POSIX shell; CRLF endings break them under Git Bash.
 *.sh text eol=lf
+*.cmd text eol=lf
+*.ps1 text eol=lf

@@ -1,0 +1,15 @@
+{
+  "name": "atmina",
+  "owner": {
+    "name": "Latent Minds",
+    "url": "https://atmina.ai"
+  },
+  "plugins": [
+    {
+      "name": "atmina",
+      "source": "./plugins/atmina-grok",
+      "version": "0.347.0",
+      "description": "Atmina shared memory. Recall before answering from training; capture decisions and findings; update existing memory; consolidate a knowledge base into a reviewed current-state view."
+    }
+  ]
+}

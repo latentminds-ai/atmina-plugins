@@ -6,18 +6,18 @@
         "hooks": [
           {
             "type": "command",
-            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/orient.sh\""
+            "command": ". \"${CLAUDE_PLUGIN_ROOT}/hooks/orient.cmd\""
           }
         ]
       }
     ],
     "PostToolUse": [
       {
-        "matcher": "mcp__atmina__write_file|mcp__atmina__write_files|mcp__atmina__update_file|mcp__atmina__upload_file|mcp__atmina__confirm_uploads",
+        "matcher": "^mcp__(atmina|plugin_atmina_atmina)__(write_file|write_files|update_file|upload_file|confirm_uploads)$",
         "hooks": [
           {
             "type": "command",
-            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/record-write.sh\""
+            "command": ". \"${CLAUDE_PLUGIN_ROOT}/hooks/record-write.cmd\""
           }
         ]
       }
@@ -27,7 +27,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/record-compaction.sh\""
+            "command": ". \"${CLAUDE_PLUGIN_ROOT}/hooks/record-compaction.cmd\""
           }
         ]
       }
@@ -37,7 +37,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/nudge.sh\""
+            "command": ". \"${CLAUDE_PLUGIN_ROOT}/hooks/nudge.cmd\""
           }
         ]
       }
