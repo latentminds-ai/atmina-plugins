@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.348.0
+
+- docs(mcp): say the HTML preview does not load resources from other sites
+
 ## v0.347.0
 
 - fix(plugins): validate Grok sessions before cached returns
