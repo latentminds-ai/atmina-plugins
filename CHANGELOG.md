@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.352.0
+
+- feat(plugins): hook, Codex AGENTS.md and Cursor rule lead with capture and carry link-and-cite
+- feat(mcp): server instructions fit 4,000 characters, capture first, link and cite; skills drop get_context and promotion
+
 ## v0.351.0
 
 No plugin changes; republished for Atmina v0.351.0.

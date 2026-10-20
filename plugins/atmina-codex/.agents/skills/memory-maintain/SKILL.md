@@ -10,9 +10,9 @@ license: Apache-2.0
 
 Out of band. Report-only (G6), except archive via `move_file` and the trail
 write. The claim-repair pass is carried here, in this skill; nothing else
-needs to be installed for it. The product's consolidate routine compiles a
-current-state view; it does not review, repair, or archive memory. This pass
-is not that routine and does not run it.
+needs to be installed for it. The product's own routines (Repair links,
+Repair claims) stage proposals for review in the app; this pass is not one of
+them, does not run them, and does not apply what they staged.
 
 
 **Announce at start:** "I'm using the memory-maintain skill to run an
@@ -41,13 +41,14 @@ out of band. A live Recall / Observe / Commit is not this skill.
 ## Procedure
 
 Keep one `kb_id`. Tools: `list_files`, `search`, `read_file`,
-`file_history`, `move_file`, `get_context` (health only), `write_file`
-(trail / report only — not live claim reword). Not assumed: apply-repairs
+`file_history`, `move_file`, `write_file` (trail / report only — not live
+claim reword). Link health is read with `read_file`, never computed here. Not assumed: apply-repairs
 MCP, write-path diagnostics, a type registry.
 
 1. **Idle gate.** In-band → STOP, write nothing.
 2. **Orient.** Confirm the KB. Durable truth is `wiki/`. `chronicle/` is
-   working. Compiled views are not organisational truth.
+   working. `_staged/` and `_reports/` are system output, not organisational
+   truth.
 3. **Dedupe.** Same-intent duplicates: propose a merge. Keep confirmed over
    inferred. Inferred is never auto-picked over confirmed.
 4. **Contradictions.** Flag. Do not auto-resolve.
@@ -59,9 +60,12 @@ MCP, write-path diagnostics, a type registry.
 8. **Linkify.** Propose-only.
    [references/linkify.md](references/linkify.md).
 9. **Health.** Durable pages never recalled, from the step-5 walk. Then
-   `get_context` with `include: ["link_health"]` for broken references and
-   unconnected pages. **Every count states what it did not check**; an
-   absent block is "not checked", never zero.
+   `read_file` `_reports/link-health.md` for broken references and
+   unconnected pages; the weekly Repair links routine rewrites it on every
+   run. **Every count states what it did not check**. When the page is
+   absent, link health is "not checked", never zero: name the gap (no Repair
+   links run has written it yet) and do not reach for another tool to fill
+   it.
    [references/health.md](references/health.md).
 10. **Trail** in `chronicle/`.
     [references/trail.md](references/trail.md).

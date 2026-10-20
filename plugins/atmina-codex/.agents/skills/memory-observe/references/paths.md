@@ -35,7 +35,7 @@ path.
 | Path | Why |
 | --- | --- |
 | `wiki/` | Durable primitives. Observe never writes them. |
-| `_consolidated/` | Compiled convenience. Not durable memory. The default current-state routine compiles the whole KB, working layer included, so a compiled view can carry candidates. On conflict, source wins. |
+| `_consolidated/` | Retired compiled views, kept until they are swept. Not durable memory, and nothing writes here any more. On conflict, source wins. |
 
 | `_sources/` | Source mirrors. Not durable memory. |
 | `_staged/` | Unreviewed machine drafts. |

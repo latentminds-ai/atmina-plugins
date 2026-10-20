@@ -6,8 +6,8 @@ path never writes.
 
 
 Shipped tools this skill may call: `whoami`, `health`, `list_kbs`,
-`get_context`, `search` (`path_prefix`, `ranking.boosts`, `filters`),
-`list_files`, `read_file`, `file_history`, `get_file_outline`, `related`.
+`search` (`path_prefix`, `ranking.boosts`, `filters`), `list_files`,
+`read_file`, `file_history`, `get_file_outline`, `related`.
 
 Do not call `write_file`, `write_files`, `update_file`, `move_file`,
 `generate_nav`, or `update_kb` on this path.
@@ -18,13 +18,13 @@ Do not search "everything" first.
 
 1. `whoami` — who is calling, which team.
 2. `list_kbs` — which Knowledge Bases this caller can read.
-3. `get_context` on the KB in play — Menu / compiled state and Pulse, so you
-   know the lay of the land before you dig.
-4. If `wiki/kb-profile.md` is present, `read_file` it. Intensity, scope, and
+3. If `wiki/kb-profile.md` is present, `read_file` it. Intensity, scope, and
    the primitive map live there.
 
-`get_context`'s Pulse and Current State are compiled convenience. They are
-not permission to act. Source in `wiki/` wins on conflict.
+To orient, search the Knowledge Base, read the best hit, and follow its
+links. There is no snapshot call: `related` on a page you have read names
+what it links to and what links to it, and the KB's description on
+`list_kbs` says what the Knowledge Base is for.
 
 ## 2. Applies-to match first
 
@@ -60,15 +60,15 @@ search({
 })
 ```
 
-- Scope is `wiki/`. Do not search `chronicle/` or `_consolidated/` as truth.
+- Scope is `wiki/`. Do not search `chronicle/` as truth.
 - Recency boosts are those two catalog fields, direction `newer`. `observed`
   is **not** a catalog boost field; do not send it.
 - `event_date` else `updated_at`: both boosts are sent. A hit missing
   `event_date` contributes nothing on that field and still ranks on
   `updated_at`.
 - Keep `max_files` small (5, default 8 is already a ceiling of 20).
-- Compiled hits that happen to appear are convenience. Source wins on
-  conflict.
+- An old compiled page under `_consolidated/` that happens to appear is
+  retired convenience, not truth. Source wins on conflict.
 - Waterline is ranking, not deletion. A historical question widens or drops
   the recency boost rather than treating an old confirmed decision as gone.
 
@@ -121,7 +121,7 @@ wiki is not "the world has no truth".
 | --- | --- | --- |
 | `wiki/` | Durable primitives | Only after verify-before-act |
 | `chronicle/` | Working layer (Observe) | No |
-| `_consolidated/` | Compiled views | No — source wins |
-| Pulse / Current State | Compiled convenience | No |
+| `_consolidated/` | Retired compiled views, kept until swept | No — source wins |
+| `_staged/`, `_reports/` | Unreviewed drafts, system reports | No |
 | Directory-card README | Setup seed | No |
 | CRM / tickets / calendars / ledgers | Live systems of record | Yes, as themselves |

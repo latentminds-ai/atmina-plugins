@@ -29,8 +29,9 @@ any artifact claim read from Atmina. Reading is free; acting needs the check.
 Do these in this order. The full recipe is
 [references/procedure.md](references/procedure.md).
 
-1. **Orient.** `whoami`, `list_kbs`, this KB's `get_context`. Read
-   `wiki/kb-profile.md` if present. Do not search everything first.
+1. **Orient.** `whoami`, `list_kbs`. Read `wiki/kb-profile.md` if present.
+   To orient, search the Knowledge Base, read the best hit, and follow its
+   links. Do not search everything first.
 2. **Applies-to first.** If the task names an artifact, `list_files` with
    `/applies_to` `eq` that key — exhaustive catalog filter, **not** `search`.
    [references/applies-to.md](references/applies-to.md).
@@ -46,10 +47,10 @@ Do these in this order. The full recipe is
    and continue with systems of record. "Not in the wiki" is not "the world
    has no truth".
 
-A Pulse, a Current State, a session note, or a directory-card README is not
-permission to act. `wiki/` is durable; `chronicle/` is working;
-`_consolidated/` is compiled; CRM / tickets / calendars / ledgers are live
-systems of record.
+A session note, a staged draft, a system report, or a directory-card README
+is not permission to act. `wiki/` is durable; `chronicle/` is working;
+`_staged/` and `_reports/` are system output; CRM / tickets / calendars /
+ledgers are live systems of record.
 
 ## Outcomes
 

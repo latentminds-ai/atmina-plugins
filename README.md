@@ -61,7 +61,7 @@ browser sign-in. `grok inspect` shows discovered skills, hooks, and MCP
 configuration; it does not prove that OAuth or a tool call succeeded.
 Update with `grok plugin update atmina`, review changes, and start a new
 session. To test an exact published release, use
-`latentminds-ai/atmina-plugins@v0.351.0#plugins/atmina-grok`.
+`latentminds-ai/atmina-plugins@v0.352.0#plugins/atmina-grok`.
 
 The Grok marketplace selects this bundle, not the Claude bundle. Grok reads
 Claude-compatible manifests but discards session-start and prompt context.
@@ -118,7 +118,7 @@ the other hooks maintain two local counter files.
 
 | Hook | Fires on | What it does |
 | --- | --- | --- |
-| `orient.sh` | session start | Prints one paragraph reminding the agent to search memory before answering from training. Writes nothing. |
+| `orient.sh` | session start | Prints one paragraph: capture what is worth keeping, link it to the pages read and cite sources, and search memory before answering from training. Writes nothing. |
 | `record-write.sh` | after an Atmina write tool | Increments a counter file. |
 | `record-compaction.sh` | before context compaction | Increments a counter file. |
 | `nudge.sh` / `nudge-prompt.sh` | end of turn (Claude Code) / next prompt (Codex) | If the session compacted without writing anything to Atmina, prints one sentence saying so, then resets the counter. Otherwise silent. |

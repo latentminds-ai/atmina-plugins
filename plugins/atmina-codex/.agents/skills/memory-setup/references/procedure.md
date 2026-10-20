@@ -6,7 +6,7 @@ Seed bytes live at `docs/agents/atmina-memory-template/`.
 Each live-KB path below is written with **those exact contents**. The fixture
 and the Knowledge Base must match.
 
-Tools: `whoami`, `list_kbs`, `get_context`, `write_file` / `write_files` with
+Tools: `whoami`, `list_kbs`, `write_file` / `write_files` with
 `if_match` on overwrite, `generate_nav`, `update_kb`, `list_files`.
 
 ## 1. Orient
@@ -16,8 +16,8 @@ Tools: `whoami`, `list_kbs`, `get_context`, `write_file` / `write_files` with
    (the qualified `team-slug/kb-slug`, or the UUID). Note the caller's **role
    on that Knowledge Base**. Owning-team `admin` is required for step 8;
    editor is enough for writes and `generate_nav`.
-3. `get_context` on that Knowledge Base — lay of the land. Do not treat
-   compiled views or working notes as a reason to skip the seed.
+   The inventory in step 2 is the lay of the land. Do not treat existing
+   working notes as a reason to skip the seed.
 
 If the operator did not name a Knowledge Base, stop and ask. Do not guess.
 

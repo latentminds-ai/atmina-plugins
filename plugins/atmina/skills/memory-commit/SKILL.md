@@ -71,8 +71,13 @@ events, `stale_after`, `applies_to` (one scalar string), actor format
    locator field, never a guessed `wiki-page` path, never ordinary prose.
 5. **Compose** against [references/checklist.md](references/checklist.md) and
    [references/link-discipline.md](references/link-discipline.md).
+   Link what you write to the pages you read, and cite your sources. Every
+   page you read to reach this commit is a markdown link in the body or a
+   typed evidence entry.
 6. **Write** with `write_file` (`create`; or `overwrite` + `if_match`). The
-   write response field is `version_n`, not `version`.
+   write response field is `version_n`, not `version`. Its `links` block
+   counts `outbound`, `resolved` and `broken`; fix a broken link before you
+   report, and treat a `links.nudge` as a page that still links to nothing.
 7. **Read it back** — [references/self-check.md](references/self-check.md).
    Re-parse. STOP if it did not survive. Do not skip it because a write-path
    diagnostic might land later.

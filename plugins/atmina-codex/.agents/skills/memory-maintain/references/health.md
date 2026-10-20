@@ -56,44 +56,56 @@ for five days.
 ## Link health
 
 Broken references and pages nothing links to. Both are computed by the
-product already; this pass only has to ask for them.
+product already, by the weekly Repair links routine, which rewrites one page
+on every run. This pass only has to read it.
 
 ```
-get_context({ kb_id, include: ["link_health"] })
+read_file({ kb_id, path: "_reports/link-health.md" })
 ```
 
-`include` is a list and `link_health` is Knowledge-Base scope only. The
-block carries two whole-Knowledge-Base counts — `broken_reference_count`
-and `unconnected_count`, never capped — plus lists clipped to ten entries
-with their own `*_truncated` flags.
+The page opens with when and by which run it was written, then four
+sections this pass reports from:
 
-Report the two counts, the clipped examples, and whether each list was
-truncated. A truncated list is reported as truncated, never as complete.
+- **Scope** — which links were counted (content pages only), how many
+  Markdown pages there are, how many links were read, and how many pages are
+  **not read yet**. A page not read yet has its links unchecked and is never
+  counted as unconnected.
+- **Summary** — whole-Knowledge-Base counts: links to nothing yet (broken
+  references, and how many missing pages they point at), pages not connected
+  to other memories, and pattern links.
+- **Links to nothing yet**, **Not connected to other memories** and **Most
+  connected** — the lists. A list cut short says so: *"Showing N of M"*.
+
+Report the counts, the listed examples, and whether each list was cut
+short. A list cut short is reported as cut short, never as complete. Report
+when the page was written, too: it is as old as the last Repair links run.
 
 ### Every count states what it did not check
 
-**Binding, not a nicety.** Link health is computed over **content-origin
-references only**. It cannot see references inside source-mirrored
-content, and there is no option to widen it. On a Knowledge Base whose
-material largely arrives through a connected source, it will therefore
-report a clean bill of health it has not earned.
+**Binding, not a nicety.** Link health is computed over **links written in
+content pages only**. It cannot see references inside source-mirrored
+content or the `_` system namespaces, and there is no option to widen it. On
+a Knowledge Base whose material largely arrives through a connected source,
+it will therefore report a clean bill of health it has not earned.
 
 So every count carries its scope in the same breath:
 
-> Broken references: 0 (content-origin references only; mirrored content
-> not covered).
+> Broken references: 0 (content-page links only; mirrored content not
+> covered; 3 pages not read yet).
 
 A count published without that qualifier is a defect. It is the same
 failure as an omitted section, one layer down: a number that reads as
 covering more than it does.
 
-### An absent block is not a zero
+### An absent page is not a zero
 
-Unrecognised `include` keys are dropped silently rather than refused, and
-the block itself resolves to an honest empty when its dependency is
-unavailable. Both look like calm.
+The page exists only after a Repair links run has written it. A new
+Knowledge Base, or one whose routine has not run yet, has none, and
+`read_file` returns not found.
 
-If no `link_health` block comes back, report **not checked**, with the
-reason if you have one. Never report zero broken references because the
-tool returned nothing — that is asserting health from an absence of
-evidence, which is exactly what the rest of this pack exists to prevent.
+If `_reports/link-health.md` is absent, report link health as **not
+checked**, and name the gap: no Repair links run has written the page yet.
+Never report zero broken references because the page was missing, and do not
+fall back to another tool to compute it — that is asserting health from an
+absence of evidence, which is exactly what the rest of this pack exists to
+prevent.

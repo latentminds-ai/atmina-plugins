@@ -2,10 +2,10 @@
 name: memory-setup
 description: Seeds an organisation Knowledge Base with the atmina-memory layout — directory-card pages for the six durable primitives, a Chronicle working-layer card, a wiki home, a kb-profile at wiki root (intensity default middle), and a schema-2 wiki/nav.yaml whose first section is a hand-curated Start here. Registers applies_to as a scalar string pointer when the caller is owning-team admin. Use when standing up a new organisational wiki, seeding an empty Knowledge Base for the atmina-memory pack, or inserting a missing Start here section without overwriting durable pages.
 license: Apache-2.0
-compatibility: Requires Atmina MCP tools whoami, list_kbs, get_context, write_file, write_files, generate_nav, update_kb, and list_files. The final binding step also needs local file reads and writes plus git rev-parse, and is skipped loudly when those are unavailable.
+compatibility: Requires Atmina MCP tools whoami, list_kbs, write_file, write_files, generate_nav, update_kb, and list_files. The final binding step also needs local file reads and writes plus git rev-parse, and is skipped loudly when those are unavailable.
 metadata:
   pack: atmina-memory
-allowed-tools: whoami list_kbs get_context write_file write_files generate_nav update_kb list_files Read Write Edit Bash(git rev-parse *)
+allowed-tools: whoami list_kbs write_file write_files generate_nav update_kb list_files Read Write Edit Bash(git rev-parse *)
 ---
 
 # Memory setup: seed the organisation layout once
@@ -30,7 +30,7 @@ Follow [references/procedure.md](references/procedure.md). Seed bytes are
 [docs/agents/atmina-memory-template/](../../../docs/agents/atmina-memory-template/)
 — write those paths with those contents. They must match.
 
-1. Orient: `whoami`, `list_kbs`, `get_context`. Keep one `kb_id`.
+1. Orient: `whoami`, `list_kbs`. Keep one `kb_id`.
 2. Inventory: `list_files` over `wiki/`, `wiki/meta/`, and `chronicle/`.
 3. Directory cards: create each missing `README.md` under the six primitive
    folders plus `chronicle/README.md`. Never `overwrite` durable prose without

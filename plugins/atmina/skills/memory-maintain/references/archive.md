@@ -8,7 +8,7 @@ in the trail for re-confirmation and do not move them for date alone.
 
 KB-root `archive/` — not `wiki/archive/`, not a `_` reserved prefix
 (`_staged/`, `_sources/`, `_consolidated/`, `_pulse/`, `_system/`,
-`_exports/` are refused).
+`_exports/`, `_reports/` are refused).
 
 `wiki/facts/acme-policy.md` → `archive/facts/acme-policy.md`
 

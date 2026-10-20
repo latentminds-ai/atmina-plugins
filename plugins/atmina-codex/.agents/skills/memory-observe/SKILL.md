@@ -55,6 +55,10 @@ silent no-op on an explicit ask.
 5. **Write with shipped tools.** `list_files`, then `write_file` /
    `write_files` with `if_match` on overwrite. Recipe:
    [references/write-recipe.md](references/write-recipe.md).
+6. **Link and cite.** Link what you write to the pages you read, and cite your
+   sources. A candidate or session note links each wiki page it read as a
+   markdown link, so the next reader can follow it; a write response with a
+   `links.nudge` means the note still links to nothing.
 
 ## What this skill does not
 
