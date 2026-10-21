@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.353.0
+
+No plugin changes; republished for Atmina v0.353.0.
+
 ## v0.352.0
 
 - feat(plugins): hook, Codex AGENTS.md and Cursor rule lead with capture and carry link-and-cite
