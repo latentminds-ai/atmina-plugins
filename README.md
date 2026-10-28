@@ -61,7 +61,7 @@ browser sign-in. `grok inspect` shows discovered skills, hooks, and MCP
 configuration; it does not prove that OAuth or a tool call succeeded.
 Update with `grok plugin update atmina`, review changes, and start a new
 session. To test an exact published release, use
-`latentminds-ai/atmina-plugins@v0.357.0#plugins/atmina-grok`.
+`latentminds-ai/atmina-plugins@v0.358.0#plugins/atmina-grok`.
 
 The Grok marketplace selects this bundle, not the Claude bundle. Grok reads
 Claude-compatible manifests but discards session-start and prompt context.
@@ -115,6 +115,12 @@ code on your machine, so they are documented in full below.
 Hooks ship POSIX scripts and a native Windows PowerShell handler in `hooks/`.
 They make no network requests. Orientation reads only the repository binding;
 the other hooks maintain two local counter files.
+
+The orientation is a reminder, not a connection health check. It tells the
+agent to discover the Atmina tools, consult memory, and disclose when missing
+tools or failed authentication prevent a lookup. If access fails, reconnect
+Atmina through your client and verify an authenticated Knowledge Base read.
+An installed plugin or a successful hook does not establish that memory works.
 
 | Hook | Fires on | What it does |
 | --- | --- | --- |

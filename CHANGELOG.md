@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.358.0
+
+- fix(plugins): disclose unavailable Atmina memory
+
 ## v0.357.0
 
 No plugin changes; republished for Atmina v0.357.0.
