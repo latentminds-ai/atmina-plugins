@@ -68,7 +68,7 @@ browser sign-in. `grok inspect` shows discovered skills, hooks, and MCP
 configuration; it does not prove that OAuth or a tool call succeeded.
 Update with `grok plugin update atmina`, review changes, and start a new
 session. To test an exact published release, use
-`latentminds-ai/atmina-plugins@v0.360.0#plugins/atmina-grok`.
+`latentminds-ai/atmina-plugins@v0.361.0#plugins/atmina-grok`.
 
 The Grok marketplace selects this bundle, not the Claude bundle. Grok reads
 Claude-compatible manifests but discards session-start and prompt context.
