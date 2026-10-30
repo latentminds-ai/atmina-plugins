@@ -1,0 +1,17 @@
+{
+  "name": "atmina",
+  "plugins": [
+    {
+      "name": "atmina",
+      "source": {
+        "source": "local",
+        "path": "./plugins/atmina"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

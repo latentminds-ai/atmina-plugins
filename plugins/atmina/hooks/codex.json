@@ -7,7 +7,9 @@
           {
             "type": "command",
             "command": "sh \"${PLUGIN_ROOT}/hooks/orient.sh\"",
-            "commandWindows": "cmd.exe /d /c call \"%SystemRoot%/System32/WindowsPowerShell/v1.0/powershell.exe\" -NoProfile -NonInteractive -ExecutionPolicy Bypass -EncodedCommand JABQAHIAbwBnAHIAZQBzAHMAUAByAGUAZgBlAHIAZQBuAGMAZQAgAD0AIAAnAFMAaQBsAGUAbgB0AGwAeQBDAG8AbgB0AGkAbgB1AGUAJwA7ACAAJgAgACgAWwBJAE8ALgBQAGEAdABoAF0AOgA6AEMAbwBtAGIAaQBuAGUAKAAkAGUAbgB2ADoAUABMAFUARwBJAE4AXwBSAE8ATwBUACwAIAAnAGgAbwBvAGsAcwAvAGEAdABtAGkAbgBhAC4AcABzADEAJwApACkAIAAtAEEAYwB0AGkAbwBuACAAbwByAGkAZQBuAHQAIAAtAEUAdgBlAG4AdABOAGEAbQBlACAAUwBlAHMAcwBpAG8AbgBTAHQAYQByAHQA"
+            "commandWindows": "cmd.exe /d /c call \"%SystemRoot%/System32/WindowsPowerShell/v1.0/powershell.exe\" -NoProfile -NonInteractive -ExecutionPolicy Bypass -EncodedCommand JABQAHIAbwBnAHIAZQBzAHMAUAByAGUAZgBlAHIAZQBuAGMAZQAgAD0AIAAnAFMAaQBsAGUAbgB0AGwAeQBDAG8AbgB0AGkAbgB1AGUAJwA7ACAAJgAgACgAWwBJAE8ALgBQAGEAdABoAF0AOgA6AEMAbwBtAGIAaQBuAGUAKAAkAGUAbgB2ADoAUABMAFUARwBJAE4AXwBSAE8ATwBUACwAIAAnAGgAbwBvAGsAcwAvAGEAdABtAGkAbgBhAC4AcABzADEAJwApACkAIAAtAEEAYwB0AGkAbwBuACAAbwByAGkAZQBuAHQAIAAtAEUAdgBlAG4AdABOAGEAbQBlACAAUwBlAHMAcwBpAG8AbgBTAHQAYQByAHQA",
+            "statusMessage": "Atmina: orienting on memory",
+            "timeout": 10
           }
         ]
       }
@@ -19,7 +21,9 @@
           {
             "type": "command",
             "command": "sh \"${PLUGIN_ROOT}/hooks/record-write.sh\"",
-            "commandWindows": "cmd.exe /d /c call \"%SystemRoot%/System32/WindowsPowerShell/v1.0/powershell.exe\" -NoProfile -NonInteractive -ExecutionPolicy Bypass -EncodedCommand JABQAHIAbwBnAHIAZQBzAHMAUAByAGUAZgBlAHIAZQBuAGMAZQAgAD0AIAAnAFMAaQBsAGUAbgB0AGwAeQBDAG8AbgB0AGkAbgB1AGUAJwA7ACAAJgAgACgAWwBJAE8ALgBQAGEAdABoAF0AOgA6AEMAbwBtAGIAaQBuAGUAKAAkAGUAbgB2ADoAUABMAFUARwBJAE4AXwBSAE8ATwBUACwAIAAnAGgAbwBvAGsAcwAvAGEAdABtAGkAbgBhAC4AcABzADEAJwApACkAIAAtAEEAYwB0AGkAbwBuACAAcgBlAGMAbwByAGQALQB3AHIAaQB0AGUAIAAtAEUAdgBlAG4AdABOAGEAbQBlACAAUwBlAHMAcwBpAG8AbgBTAHQAYQByAHQA"
+            "commandWindows": "cmd.exe /d /c call \"%SystemRoot%/System32/WindowsPowerShell/v1.0/powershell.exe\" -NoProfile -NonInteractive -ExecutionPolicy Bypass -EncodedCommand JABQAHIAbwBnAHIAZQBzAHMAUAByAGUAZgBlAHIAZQBuAGMAZQAgAD0AIAAnAFMAaQBsAGUAbgB0AGwAeQBDAG8AbgB0AGkAbgB1AGUAJwA7ACAAJgAgACgAWwBJAE8ALgBQAGEAdABoAF0AOgA6AEMAbwBtAGIAaQBuAGUAKAAkAGUAbgB2ADoAUABMAFUARwBJAE4AXwBSAE8ATwBUACwAIAAnAGgAbwBvAGsAcwAvAGEAdABtAGkAbgBhAC4AcABzADEAJwApACkAIAAtAEEAYwB0AGkAbwBuACAAcgBlAGMAbwByAGQALQB3AHIAaQB0AGUAIAAtAEUAdgBlAG4AdABOAGEAbQBlACAAUABvAHMAdABUAG8AbwBsAFUAcwBlAA==",
+            "statusMessage": "Atmina: recording write",
+            "timeout": 10
           }
         ]
       }
@@ -30,7 +34,9 @@
           {
             "type": "command",
             "command": "sh \"${PLUGIN_ROOT}/hooks/record-compaction.sh\"",
-            "commandWindows": "cmd.exe /d /c call \"%SystemRoot%/System32/WindowsPowerShell/v1.0/powershell.exe\" -NoProfile -NonInteractive -ExecutionPolicy Bypass -EncodedCommand JABQAHIAbwBnAHIAZQBzAHMAUAByAGUAZgBlAHIAZQBuAGMAZQAgAD0AIAAnAFMAaQBsAGUAbgB0AGwAeQBDAG8AbgB0AGkAbgB1AGUAJwA7ACAAJgAgACgAWwBJAE8ALgBQAGEAdABoAF0AOgA6AEMAbwBtAGIAaQBuAGUAKAAkAGUAbgB2ADoAUABMAFUARwBJAE4AXwBSAE8ATwBUACwAIAAnAGgAbwBvAGsAcwAvAGEAdABtAGkAbgBhAC4AcABzADEAJwApACkAIAAtAEEAYwB0AGkAbwBuACAAcgBlAGMAbwByAGQALQBjAG8AbQBwAGEAYwB0AGkAbwBuACAALQBFAHYAZQBuAHQATgBhAG0AZQAgAFMAZQBzAHMAaQBvAG4AUwB0AGEAcgB0AA=="
+            "commandWindows": "cmd.exe /d /c call \"%SystemRoot%/System32/WindowsPowerShell/v1.0/powershell.exe\" -NoProfile -NonInteractive -ExecutionPolicy Bypass -EncodedCommand JABQAHIAbwBnAHIAZQBzAHMAUAByAGUAZgBlAHIAZQBuAGMAZQAgAD0AIAAnAFMAaQBsAGUAbgB0AGwAeQBDAG8AbgB0AGkAbgB1AGUAJwA7ACAAJgAgACgAWwBJAE8ALgBQAGEAdABoAF0AOgA6AEMAbwBtAGIAaQBuAGUAKAAkAGUAbgB2ADoAUABMAFUARwBJAE4AXwBSAE8ATwBUACwAIAAnAGgAbwBvAGsAcwAvAGEAdABtAGkAbgBhAC4AcABzADEAJwApACkAIAAtAEEAYwB0AGkAbwBuACAAcgBlAGMAbwByAGQALQBjAG8AbQBwAGEAYwB0AGkAbwBuACAALQBFAHYAZQBuAHQATgBhAG0AZQAgAFMAZQBzAHMAaQBvAG4AUwB0AGEAcgB0AA==",
+            "statusMessage": "Atmina: recording compaction",
+            "timeout": 10
           }
         ]
       }
@@ -41,7 +47,9 @@
           {
             "type": "command",
             "command": "sh \"${PLUGIN_ROOT}/hooks/nudge-prompt.sh\"",
-            "commandWindows": "cmd.exe /d /c call \"%SystemRoot%/System32/WindowsPowerShell/v1.0/powershell.exe\" -NoProfile -NonInteractive -ExecutionPolicy Bypass -EncodedCommand JABQAHIAbwBnAHIAZQBzAHMAUAByAGUAZgBlAHIAZQBuAGMAZQAgAD0AIAAnAFMAaQBsAGUAbgB0AGwAeQBDAG8AbgB0AGkAbgB1AGUAJwA7ACAAJgAgACgAWwBJAE8ALgBQAGEAdABoAF0AOgA6AEMAbwBtAGIAaQBuAGUAKAAkAGUAbgB2ADoAUABMAFUARwBJAE4AXwBSAE8ATwBUACwAIAAnAGgAbwBvAGsAcwAvAGEAdABtAGkAbgBhAC4AcABzADEAJwApACkAIAAtAEEAYwB0AGkAbwBuACAAbgB1AGQAZwBlACAALQBFAHYAZQBuAHQATgBhAG0AZQAgAFUAcwBlAHIAUAByAG8AbQBwAHQAUwB1AGIAbQBpAHQA"
+            "commandWindows": "cmd.exe /d /c call \"%SystemRoot%/System32/WindowsPowerShell/v1.0/powershell.exe\" -NoProfile -NonInteractive -ExecutionPolicy Bypass -EncodedCommand JABQAHIAbwBnAHIAZQBzAHMAUAByAGUAZgBlAHIAZQBuAGMAZQAgAD0AIAAnAFMAaQBsAGUAbgB0AGwAeQBDAG8AbgB0AGkAbgB1AGUAJwA7ACAAJgAgACgAWwBJAE8ALgBQAGEAdABoAF0AOgA6AEMAbwBtAGIAaQBuAGUAKAAkAGUAbgB2ADoAUABMAFUARwBJAE4AXwBSAE8ATwBUACwAIAAnAGgAbwBvAGsAcwAvAGEAdABtAGkAbgBhAC4AcABzADEAJwApACkAIAAtAEEAYwB0AGkAbwBuACAAbgB1AGQAZwBlACAALQBFAHYAZQBuAHQATgBhAG0AZQAgAFUAcwBlAHIAUAByAG8AbQBwAHQAUwB1AGIAbQBpAHQA",
+            "statusMessage": "Atmina: memory nudge",
+            "timeout": 10
           }
         ]
       }

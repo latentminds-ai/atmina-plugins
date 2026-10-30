@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.359.1
+
+No plugin changes; republished for Atmina v0.359.1.
+
+## v0.359.0
+
+- fix(plugins): validate Codex catalog and verify hook upgrades
+- fix(plugins): complete Codex hook setup
+- fix(plugins): label Codex hooks and note desktop project requirement
+
 ## v0.358.0
 
 - fix(plugins): disclose unavailable Atmina memory

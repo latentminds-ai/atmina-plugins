@@ -38,9 +38,16 @@ codex plugin add atmina@atmina
 ```
 
 This installs the Atmina plugin with its MCP connection, skills, and hooks.
+Codex desktop supports lifecycle hooks only for manually installed plugins,
+such as this marketplace installation. Plugins containing hooks are not
+eligible for the public plugin directory.
 Complete the browser-based authorization when prompted, then start a new
-Codex task to load the plugin. Review changed hook commands through the normal
-Codex trust prompt after an upgrade.
+Codex task to load the plugin. In the Codex desktop app, open a local project
+folder before looking at Settings > Hooks. Plugin hooks are hidden without one
+(upstream issue https://github.com/openai/codex/issues/43123). Plugin hooks
+must be reviewed and trusted via `/hooks` in the Codex CLI before they run.
+Review them again when an upgrade changes their definitions. Each Atmina
+Codex hook has a readable title and a 10-second timeout.
 
 The separate `plugins/atmina-codex` directory is a legacy manual export. Its
 `config.toml` registers only MCP; it does not install hooks. Use the marketplace
@@ -61,7 +68,7 @@ browser sign-in. `grok inspect` shows discovered skills, hooks, and MCP
 configuration; it does not prove that OAuth or a tool call succeeded.
 Update with `grok plugin update atmina`, review changes, and start a new
 session. To test an exact published release, use
-`latentminds-ai/atmina-plugins@v0.358.0#plugins/atmina-grok`.
+`latentminds-ai/atmina-plugins@v0.359.1#plugins/atmina-grok`.
 
 The Grok marketplace selects this bundle, not the Claude bundle. Grok reads
 Claude-compatible manifests but discards session-start and prompt context.
