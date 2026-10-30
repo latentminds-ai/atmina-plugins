@@ -1,6 +1,6 @@
 {
   "name": "atmina",
-  "version": "0.361.0",
+  "version": "0.362.0",
   "description": "Atmina shared memory. Capture decisions and findings, linked to the pages you read; recall before answering from training by searching, reading and following links; update existing memory.",
   "author": {
     "name": "Latent Minds"
