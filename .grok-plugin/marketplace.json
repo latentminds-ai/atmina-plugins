@@ -8,7 +8,7 @@
     {
       "name": "atmina",
       "source": "./plugins/atmina-grok",
-      "version": "0.359.1",
+      "version": "0.360.0",
       "description": "Atmina shared memory. Capture decisions and findings, linked to the pages you read; recall before answering from training by searching, reading and following links; update existing memory."
     }
   ]
