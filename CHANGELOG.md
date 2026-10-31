@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.364.0
+
+No plugin changes; republished for Atmina v0.364.0.
+
 ## v0.363.0
 
 - feat(observability): add paged Trace and pure device normalization
