@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.377.0
+
+- test(plugins): make the boundary, fixture-6 and ledger assertions exact
+- test(plugins): prove the walk's cycle, malformed and dangling parent refusals
+- fix(plugins): decline a named leaf with no eligible ancestor
+- refactor(plugins): hold the source parent-link check in one helper
+- fix(plugins): end the conversation path where eligible content ends
+- test(plugins): reconcile F-CC source records with each expected count
+- test(plugins): keep the observed model and permission mode as raw evidence
+- test(plugins): prove fixture 6 on the harness path over F-CC
+
 ## v0.376.0
 
 No plugin changes; republished for Atmina v0.376.0.
