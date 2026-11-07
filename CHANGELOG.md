@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.379.0
+
+- test(plugins): assert the held-file runs' outcome exactly, before their hold counters
+- fix(plugins): make a disable final for the run and bound a waiting child
+- refactor(plugins): bound the spool once per pass, before the drain
+- fix(plugins): bound the spool before any drain and keep refusals per Session
+- fix(plugins): persist a withdrawal or disable before counting it
+- test(plugins): a touched transcript with no new record builds no timer revision
+- test(plugins): a timer snapshot of a transcript mid-write takes complete lines only
+- test(plugins): prove collector durability, refusals, revocation and status on three systems
+- feat(plugins): make the collector durable across long sessions, rewrites and refusals
+
 ## v0.378.0
 
 - test(plugins): require whoami 5xx retries inside the call
