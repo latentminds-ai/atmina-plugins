@@ -1,5 +1,27 @@
 # Changelog
 
+## v0.378.0
+
+- test(plugins): require whoami 5xx retries inside the call
+- test(plugins): pin the withdrawn-Session rule, whoami 5xx, both backoff caps and directory modes
+- fix(plugins): keep a withdrawn Session withdrawn after re-admission
+- test(plugins): prove the metadata-only decline and the quiet withdrawn start
+- fix(plugins): decline metadata-only snapshots and keep a withdrawn device off the network
+- test(plugins): prove review fix round 1 on the three-system matrix
+- fix(plugins): make withdrawal durable and harden the collector per review
+- fix(plugins): bind the PowerShell capture event and share one event-tag map
+- test(plugins): prove withdrawal, opt-out and the module's declines end to end
+- fix(plugins): never let a withdrawn or opted-out interval reach the module
+- test(plugins): treat a probe that throws as not yet while waiting
+- test(plugins): plant enabled-looking fallbacks so a Windows temp-directory fallback fails
+- test(plugins): read the runner's SID through the collector's own reader
+- test(plugins): wait for the collector to exit before cleanup, and give Windows enable a private root
+- fix(plugins): start the collector outside the data directory and read the ACL without modules
+- test(plugins): prove the collector end to end on the three-system matrix
+- feat(plugins): enqueue SessionStart and SessionEnd input for the collector
+- feat(plugins): build the local collector and its committed bundle
+- build(plugins): generate the collector transport from the published capture contract
+
 ## v0.377.0
 
 - test(plugins): make the boundary, fixture-6 and ledger assertions exact
