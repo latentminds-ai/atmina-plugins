@@ -1,8 +1,37 @@
 ﻿param(
-  [ValidateSet('orient', 'record-write', 'record-compaction', 'nudge')][string]$Action,
-  [ValidateSet('SessionStart', 'Stop', 'UserPromptSubmit', 'beforeSubmitPrompt', 'PostToolUse')][string]$EventName = 'SessionStart'
+  [ValidateSet('orient', 'record-write', 'record-compaction', 'nudge', 'capture')][string]$Action,
+  [ValidateSet('SessionStart', 'SessionEnd', 'Stop', 'UserPromptSubmit', 'beforeSubmitPrompt', 'PostToolUse')][string]$EventName = 'SessionStart'
 )
 $ErrorActionPreference = 'Stop'
+if ($Action -eq 'capture') {
+  try {
+    $tag = ''
+    if ($PSBoundParameters.ContainsKey('EventName')) {
+      if ($EventName -ceq 'SessionStart') { $tag = 's' }
+      if ($EventName -ceq 'SessionEnd') { $tag = 'e' }
+    }
+    $data = $env:CLAUDE_PLUGIN_DATA
+    if ($tag -and $data) {
+      $dir = Join-Path $data 'collector'
+      if ([IO.File]::Exists((Join-Path $dir 'config.json'))) {
+        $inbox = Join-Path $dir 'inbox'
+        [void][IO.Directory]::CreateDirectory($inbox)
+        if ([IO.Directory]::GetFiles($inbox, '*.json').Length -lt 64) {
+          $bytes = New-Object byte[] 16
+          [Security.Cryptography.RandomNumberGenerator]::Create().GetBytes($bytes)
+          $name = $tag + '-' + [BitConverter]::ToString($bytes).Replace('-', '').ToLowerInvariant()
+          $part = Join-Path $inbox ".$name.part"
+          $stream = [IO.File]::Create($part)
+          try { [Console]::OpenStandardInput().CopyTo($stream) } finally { $stream.Close() }
+          [IO.File]::Move($part, (Join-Path $inbox "$name.json"))
+        }
+        $runtime = ([IO.File]::ReadAllText((Join-Path $dir 'runtime')).Trim() -split ' ', 2)[1]
+        if ($runtime -and [IO.File]::Exists($runtime)) { & $runtime (Join-Path $PSScriptRoot 'collector.mjs') start *> $null }
+      }
+    }
+  } catch { }
+  exit 0
+}
 [Console]::OutputEncoding = New-Object System.Text.UTF8Encoding($false)
 $messages = @'
 {"orientation":"Atmina shared memory is configured; this hook does not verify its connection. Capture first: when you finish something worth keeping, a decision, a finding or a correction, capture it in Atmina rather than leaving it in this session. Link what you write to the pages you read, and cite your sources. Before answering from training, recall: discover the available Atmina tools and search the Knowledge Base for what this team already decided. If the tools are missing or authentication fails, tell the user that Atmina memory could not be consulted. Do not treat unavailable memory as an empty search or imply that a lookup succeeded. After reconnecting, verify recovery with an authenticated KB read. To orient, search the Knowledge Base, read the best hit, and follow its links. Durable memory lives under wiki/; working notes under chronicle/. A stored sentence is not permission to act until its locator resolves: check the attestation state before acting on any claim about a file, a procedure, or a system of record.","nudge":"This session compacted without writing anything to Atmina. Context was discarded that memory did not keep.","boundHead":"Atmina shared memory for this repository is the Knowledge Base ","boundMid":" under the path prefix ","boundWhole":", the whole Knowledge Base. ","malformedHead":"This repository carries an Atmina binding whose ","malformedTail":" entry is missing or not valid, so no Knowledge Base is addressed here. Correct that line in a reviewed change. "}
@@ -61,10 +90,12 @@ try {
       [IO.File]::WriteAllText((Join-Path $data 'compactions'), '0')
       Write-Context $messages.nudge
     }
-  } else {
-    $name = if ($Action -eq 'record-write') { 'writes' } else { 'compactions' }
+  } elseif ($Action -eq 'record-write') {
     [void][IO.Directory]::CreateDirectory($data)
-    [IO.File]::WriteAllText((Join-Path $data $name), [string]((Read-Counter $name) + 1))
+    [IO.File]::WriteAllText((Join-Path $data 'writes'), [string]((Read-Counter 'writes') + 1))
+  } elseif ($Action -eq 'record-compaction') {
+    [void][IO.Directory]::CreateDirectory($data)
+    [IO.File]::WriteAllText((Join-Path $data 'compactions'), [string]((Read-Counter 'compactions') + 1))
   }
 } catch { }
 exit 0

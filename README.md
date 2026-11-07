@@ -68,7 +68,7 @@ browser sign-in. `grok inspect` shows discovered skills, hooks, and MCP
 configuration; it does not prove that OAuth or a tool call succeeded.
 Update with `grok plugin update atmina`, review changes, and start a new
 session. To test an exact published release, use
-`latentminds-ai/atmina-plugins@v0.379.0#plugins/atmina-grok`.
+`latentminds-ai/atmina-plugins@v0.380.0#plugins/atmina-grok`.
 
 The Grok marketplace selects this bundle, not the Claude bundle. Grok reads
 Claude-compatible manifests but discards session-start and prompt context.
@@ -114,14 +114,19 @@ share, audit, and scheduled routines.
 recalling durable memory and verifying it before acting, committing decisions
 with evidence, and an out-of-band maintenance pass.
 
-**Four editor hooks** (Claude Code and Codex). These are the part that runs
-code on your machine, so they are documented in full below.
+**Editor hooks** (Claude Code, Codex and Grok Build), and a **local session
+collector** in the Claude Code plugin that does nothing until you enable it.
+These are the parts that run code on your machine, so they are documented in
+full below.
 
 ## What the hooks do
 
-Hooks ship POSIX scripts and a native Windows PowerShell handler in `hooks/`.
-They make no network requests. Orientation reads only the repository binding;
-the other hooks maintain two local counter files.
+Hooks ship POSIX scripts, polyglot launchers and a native Windows PowerShell
+handler in `hooks/`. The orientation, counter and nudge hooks make no network
+requests. Orientation reads only the repository binding; the other hooks
+maintain two local counter files. The Claude Code plugin's capture command
+hands session starts and ends to the local session collector, which stays off
+until you enable it; see "Local session capture" below.
 
 The orientation is a reminder, not a connection health check. It tells the
 agent to discover the Atmina tools, consult memory, and disclose when missing
@@ -135,6 +140,13 @@ An installed plugin or a successful hook does not establish that memory works.
 | `record-write.sh` | after an Atmina write tool | Increments a counter file. |
 | `record-compaction.sh` | before context compaction | Increments a counter file. |
 | `nudge.sh` / `nudge-prompt.sh` | end of turn (Claude Code) / next prompt (Codex) | If the session compacted without writing anything to Atmina, prints one sentence saying so, then resets the counter. Otherwise silent. |
+| `capture.sh` | session start and session end (Claude Code only) | On a device where capture is not enabled, writes nothing and exits. Once enabled, copies the hook's input unchanged into the collector's local inbox and starts `collector.mjs`. It reads only SessionStart and SessionEnd input, parses nothing and makes no network request. |
+| `capture-start.cmd` / `capture-end.cmd` | session start / session end (Claude Code only) | Launchers that name their event and run `capture.sh`, or the capture action of `atmina.ps1` on Windows without Git Bash. |
+| `orient.cmd`, `record-write.cmd`, `record-compaction.cmd`, `nudge.cmd` | as their scripts (Claude Code) | Launchers that run the matching `.sh` script, or `atmina.ps1` on Windows without Git Bash. |
+| `atmina.ps1` | as the launchers | The Windows PowerShell handler for orientation, the counters and the nudge. In the Claude Code plugin it also has the capture action, which does what `capture.sh` does. |
+| `collector.mjs` | started by the capture command once enabled; run by you to enable it or read its status | The local session collector, run with Node.js. See "Local session capture" below. |
+| `memory.sh`, `memory.ps1`, `post-tool.cmd`, `cleanup.cmd` | after tool calls, before compaction and at session end (Grok Build) | Grok's orientation, counters and per-session cleanup, described under Grok Build above. No network requests. |
+| `hooks.json` / `codex.json` | — | The hook manifests. Only the Claude Code plugin's `hooks.json` registers the capture command. |
 
 **Claude Code and Codex write** two small counter files, each holding a
 number. They live in the plugin data directory your editor provides
@@ -146,8 +158,10 @@ using its native hook schema and context format. Each prompt re-reads the
 repository binding, including after compaction; no hook state is stored.
 Claude Code uses a small shell/batch launcher; Codex selects a separate hook
 manifest with a Windows command override. The Windows handler uses built-in
-Windows PowerShell 5.1, without global Node, Python, WSL, or Git Bash. Claude
-Code can also run the POSIX scripts through its Git Bash shell. Git is optional
+Windows PowerShell 5.1, without global Node, Python, WSL, or Git Bash, for
+orientation, the counters and the nudge. Only the local session collector
+needs Node.js, and only once you enable it. Claude Code can also run the POSIX
+scripts through its Git Bash shell. Git is optional
 for ambient orientation, and required to locate a repository’s binding.
 
 An organisation's PowerShell Group Policy (for example, AllSigned) overrides
@@ -159,6 +173,71 @@ Windows command execution is regression-tested with spaces and Unicode in
 plugin and data paths. Full authenticated client lifecycle verification and
 fresh-install/upgrade verification are still pending; do not interpret command
 tests as a claim that every client/version has passed those checks.
+
+## Local session capture
+
+The Claude Code plugin carries a local session collector, `collector.mjs`,
+for teams that use Atmina's Sessions. **Nothing changes on your device until
+you enable it.** Until then the capture command writes nothing and starts
+nothing, and the collector makes no network request.
+
+You enable it yourself, once per device, by running the collector's enable
+step from the plugin's `hooks/` directory with Node.js 22 or later:
+
+```sh
+node collector.mjs enable --team <team> --root <project directory>
+```
+
+It works only for a team that has local capture turned on in Atmina and a
+member enrolled in Sessions. It signs the device in through Atmina's device
+sign-in, then shows a notice that names your team and the projects you chose,
+says who can read what is captured and how long it is kept, and links the
+privacy notice and the export and erasure controls. It enables capture only
+if you type yes at a terminal, and writes nothing otherwise.
+`node collector.mjs status` reports what the collector is doing.
+
+On Windows the enable step refuses for now, as `windows_unverified`, so
+capture stays off there. The Windows access control list protection described
+below applies once capture has been verified on Windows.
+
+Once enabled:
+
+- **What it reads.** The capture command reads only the input of the
+  SessionStart and SessionEnd hooks: the session id, the prompt id, the
+  event's name, the working directory, the transcript path, the permission
+  mode, the effort level, the reason a session started or ended, the time of
+  the event and, when Claude Code sends them, the model, the agent type and
+  the session's title. Those are the fields `session_id`, `prompt_id`,
+  `hook_event_name`, `cwd`, `transcript_path`, `permission_mode`,
+  `effort`, `source`, `reason`, `timestamp`, `model`, `agent_type` and
+  `session_title`. It never runs on a hook whose input carries a prompt or a
+  response.
+  The collector reads the Claude Code transcripts of live interactive
+  sessions in the projects you chose. Historical sessions and unattended runs
+  are excluded.
+- **What it writes.** Only in the plugin data directory
+  (`CLAUDE_PLUGIN_DATA`): its configuration, the device's sign-in, a
+  short-lived inbox of hook input, and a queue of protected session revisions
+  waiting to upload, at most 64 MiB for the team for at most 30 days. On
+  macOS and Linux these files are readable only by you. On Windows they are
+  protected by your user profile's access control list rather than by file
+  modes.
+- **What it sends.** Only to the Atmina address you enabled it against, and
+  to the short-lived upload addresses Atmina returns: it registers each
+  session, uploads each protected revision and confirms it. Automatic
+  protection runs on the device before anything is queued or uploaded, but it
+  may miss sensitive information.
+
+When your team turns local capture off or your enrollment ends, the collector
+stops and clears its pending copies once it learns of the change.
+Uninstalling the plugin removes the collector, and Claude Code deletes the
+plugin data directory by default. Neither deletes Claude Code's own
+transcripts.
+
+Node.js 22 or later is required on every system. On Windows, Git for Windows
+is optional: without it, Claude Code runs the hooks through PowerShell.
+Capture cannot yet be enabled on Windows: the enable step refuses there until
+capture has been verified on a real Windows machine.
 
 ## Versioning
 

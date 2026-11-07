@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.380.0
+
+- test(plugins): check by content that no file outside the Claude Code hooks directory carries the collector bundle
+- docs(plugins): name every field the capture command reads and say enable refuses on Windows for now
+- test(plugins): pin the Windows enable refusal before any local read
+- feat(plugins): accept the enable notice's answer only when typed at a terminal
+- test(plugins): generate the Windows hook tests' plugin once per file
+- docs(plugins): disclose what the collector reads, writes and sends, and list every hook file
+- feat(plugins): refuse enable on Windows until verified and show the signed notice before enabling
+- feat(plugins): register capture on SessionStart and SessionEnd and ship the collector in the Claude Code plugin
+
 ## v0.379.0
 
 - test(plugins): assert the held-file runs' outcome exactly, before their hold counters

@@ -1,5 +1,5 @@
 {
-  "description": "Atmina memory: orient on the Knowledge Base at session start, and notice durable work that was never written down.",
+  "description": "Atmina memory: orient on the Knowledge Base at session start, notice durable work that was never written down, and hand session starts and ends to the local collector on a device where capture is enabled.",
   "hooks": {
     "SessionStart": [
       {
@@ -7,6 +7,14 @@
           {
             "type": "command",
             "command": ". \"${CLAUDE_PLUGIN_ROOT}/hooks/orient.cmd\""
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": ". \"${CLAUDE_PLUGIN_ROOT}/hooks/capture-start.cmd\""
           }
         ]
       }
@@ -38,6 +46,16 @@
           {
             "type": "command",
             "command": ". \"${CLAUDE_PLUGIN_ROOT}/hooks/nudge.cmd\""
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": ". \"${CLAUDE_PLUGIN_ROOT}/hooks/capture-end.cmd\""
           }
         ]
       }
