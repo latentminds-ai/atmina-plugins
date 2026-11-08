@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.381.0
+
+No plugin changes; republished for Atmina v0.381.0.
+
 ## v0.380.0
 
 - test(plugins): check by content that no file outside the Claude Code hooks directory carries the collector bundle
