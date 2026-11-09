@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.382.0
+
+- feat(trace): inspect observed skill invocations and supported revision evidence
+- test(collector): admit the pure harness timeline contract as a named shared leaf
+- feat(trace): inspect local Claude Code timelines and source-observed model usage
+
 ## v0.381.0
 
 No plugin changes; republished for Atmina v0.381.0.

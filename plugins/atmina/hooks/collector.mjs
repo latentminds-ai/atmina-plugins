@@ -1982,6 +1982,8 @@ function traceObjectKeys(company_team_id, session_id) {
   };
 }
 
+var HARNESS_TIMELINE_NORMALIZER_VERSION = 2;
+
 var object = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
 var uuid = (value) => typeof value === "string" && /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);
 var prefixed = (prefix) => (value) => typeof value === "string" && new RegExp(`^${prefix}_[A-Za-z0-9_-]{1,180}$`).test(value);
@@ -2343,15 +2345,92 @@ function unsupported(record, identities) {
     "redacted_thinking"
   ].includes(String(block.type)) || block.type === "tool_use" && !prefixed("toolu")(block.id) || block.type === "tool_result" && !prefixed("toolu")(block.tool_use_id) || block.type === "tool_use" && record.type !== "assistant" || block.type === "tool_result" && record.type !== "user" || Object.keys(block).some((key) => !(blockKeys[String(block.type)] ?? []).includes(key)));
 }
-function normalized(records, counts) {
+function renderedText(record) {
+  const message = object(record.message) ? record.message : null;
+  if (message && typeof message.content === "string")
+    return message.content;
+  return blocksOf(record).filter((block) => object(block) && block.type === "text" && typeof block.text === "string").map((block) => String(block.text)).join(`
+`);
+}
+async function sha256Hex2(text) {
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+  return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, "0")).join("");
+}
+var skillSegment = /^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/;
+var skillSources = ["plugin", "bundled", "userSettings", "projectSettings"];
+function skillBase(body) {
+  const line = /^Base directory for this skill: (\S[^\n]*)$/m.exec(body)?.[1]?.replace(/\/+$/, "");
+  if (!line || line.includes(REDACTED))
+    return null;
+  const plugin = /\/\.claude\/plugins\/cache\/[^/]+\/([^/]+)\/([^/]+)\/skills\/([^/]+)$/.exec(line);
+  if (plugin && [plugin[1], plugin[2], plugin[3]].every((part) => skillSegment.test(part)))
+    return { source: "plugin", qualified_name: `plugin:${plugin[1]}:${plugin[3]}`, plugin_version: plugin[2] };
+  const user = /^(?:\/Users\/[^/]+|\/home\/[^/]+|\/root)\/\.claude\/skills\/([^/]+)$/.exec(line);
+  if (user && skillSegment.test(user[1]))
+    return { source: "userSettings", qualified_name: `userSettings:${user[1]}`, plugin_version: null };
+  const project = /^\/.+\/\.claude\/skills\/([^/]+)$/.exec(line);
+  if (project && skillSegment.test(project[1]))
+    return { source: "projectSettings", qualified_name: `projectSettings:${project[1]}`, plugin_version: null };
+  return null;
+}
+function qualifiedFromListing(name, qualifiers) {
+  const bare = name?.split(":").at(-1);
+  const seen = bare ? qualifiers.get(bare) : undefined;
+  if (!seen || seen.size !== 1)
+    return null;
+  const qualified = [...seen][0];
+  const parts = qualified.split(":");
+  if (!skillSources.includes(parts[0]) || parts.at(-1) !== bare || !parts.every((part) => skillSegment.test(part)))
+    return null;
+  return { source: parts[0], qualified_name: qualified };
+}
+function skillInvocation(trigger, name, body, digest, qualifiers) {
+  const base = body ? skillBase(renderedText(body)) : null;
+  const qualified = base ?? qualifiedFromListing(name, qualifiers);
+  return {
+    trigger,
+    source: qualified?.source ?? null,
+    name: name && name.length <= 512 ? name : null,
+    qualified_name: qualified?.qualified_name ?? null,
+    plugin_version: base?.plugin_version ?? null,
+    content_sha256: body && digest ? digest : null
+  };
+}
+function normalized(records, counts, source, responses, digests = new Map) {
   const calls = new Map;
+  const bodiesByCall = new Map;
+  const bodiesByParent = new Map;
+  for (const record of records) {
+    const original = source.get(String(record.uuid)) ?? record;
+    if (original.type !== "user" || original.isMeta !== true)
+      continue;
+    if (Object.hasOwn(original, "sourceToolUseID")) {
+      if (prefixed("toolu")(original.sourceToolUseID) && !bodiesByCall.has(String(original.sourceToolUseID)))
+        bodiesByCall.set(String(original.sourceToolUseID), record);
+    } else if (uuid(original.parentUuid) && !bodiesByParent.has(String(original.parentUuid)))
+      bodiesByParent.set(String(original.parentUuid), record);
+  }
+  const qualifiers = new Map;
+  const userBodies = new Set;
   for (const record of records)
     for (const block of blocksOf(record))
       if (object(block) && block.type === "tool_use" && prefixed("toolu")(block.id))
         calls.set(String(block.id), typeof block.name === "string" ? block.name : "unknown");
   const events = [];
+  let turn = null;
+  const carried = new Set;
   for (const record of records) {
+    if (record.type === "attachment" && object(record.attachment) && record.attachment.type === "invoked_skills" && Array.isArray(record.attachment.skills)) {
+      for (const skill of record.attachment.skills)
+        if (object(skill) && typeof skill.name === "string" && typeof skill.path === "string")
+          qualifiers.set(skill.name, (qualifiers.get(skill.name) ?? new Set).add(skill.path));
+    }
     if (record.type !== "user" && record.type !== "assistant")
+      continue;
+    const original = source.get(String(record.uuid)) ?? record;
+    if (original.type === "user" && uuid(original.promptId))
+      turn = String(original.promptId);
+    if (original.type === "user" && original.isMeta === true && (Object.hasOwn(original, "sourceToolUseID") || userBodies.has(String(record.uuid))))
       continue;
     const ts = Date.parse(String(record.timestamp));
     if (!Number.isFinite(ts))
@@ -2359,8 +2438,19 @@ function normalized(records, counts) {
     const message = object(record.message) ? record.message : null;
     if (!message)
       continue;
-    if (record.type === "user" && typeof message.content === "string")
-      events.push({ type: "user_message", ts, text: message.content });
+    const key = record.type === "assistant" ? responseKey(original) : null;
+    const response = key ? responses.get(key) : undefined;
+    const before = events.length;
+    if (record.type === "user" && typeof message.content === "string") {
+      const event = { type: "user_message", ts, text: message.content };
+      const command = /^<command-name>\/([^<\n]{1,512})<\/command-name>/.exec(message.content)?.[1];
+      const body = command ? bodiesByParent.get(String(original.uuid)) : undefined;
+      if (command && body) {
+        userBodies.add(String(body.uuid));
+        event.skill_invocation = skillInvocation("user", command, body, digests.get(String(body.uuid)), qualifiers);
+      }
+      events.push(event);
+    }
     for (const block of blocksOf(record)) {
       if (!object(block))
         continue;
@@ -2376,17 +2466,24 @@ function normalized(records, counts) {
           events.push({ type: "agent_thinking", ts, text: block.thinking });
         else
           counts.omitted.empty_thinking++;
-      } else if (record.type === "assistant" && block.type === "tool_use")
-        events.push({
+      } else if (record.type === "assistant" && block.type === "tool_use") {
+        const id = prefixed("toolu")(block.id) ? String(block.id) : null;
+        const event = {
           type: "tool_call",
           ts,
           tool: typeof block.name === "string" ? block.name : "unknown",
           input: block.input ?? null,
-          tool_call_id: prefixed("toolu")(block.id) ? String(block.id) : null,
-          tool_call_id_source: prefixed("toolu")(block.id) ? "provider" : null,
+          tool_call_id: id,
+          tool_call_id_source: id ? "provider" : null,
           tool_state: "input-available"
-        });
-      else if (record.type === "user" && block.type === "tool_result") {
+        };
+        if (block.name === "Skill" && id) {
+          const input = object(block.input) ? block.input : {};
+          const body = bodiesByCall.get(id);
+          event.skill_invocation = skillInvocation("model", typeof input.skill === "string" ? input.skill : null, body, body ? digests.get(String(body.uuid)) : undefined, qualifiers);
+        }
+        events.push(event);
+      } else if (record.type === "user" && block.type === "tool_result") {
         const spilled = typeof block.content === "string" && /<persisted-output>/.test(block.content);
         if (spilled)
           counts.omitted.spilled_output++;
@@ -2402,6 +2499,18 @@ function normalized(records, counts) {
           tool_call_id_source: id ? "provider" : null,
           tool_state: error ? "output-error" : spilled ? "outcome_unknown" : "output-available"
         });
+      }
+    }
+    for (const event of events.slice(before)) {
+      event.turn_key = turn;
+      if (!response?.response_key)
+        continue;
+      event.response_key = response.response_key;
+      event.model = response.model;
+      event.model_state = response.model_state;
+      if (!carried.has(key)) {
+        carried.add(key);
+        event.response_usage = response.usage;
       }
     }
   }
@@ -2446,31 +2555,80 @@ function usageOf(records, predecessor, hasPredecessor) {
       cacheWrite: tokens(reported.cache_creation_input_tokens) ? reported.cache_creation_input_tokens : 0
     };
   };
+  const responses = new Map;
+  const models = new Map;
+  const unknownCounters = {
+    input_tokens: null,
+    output_tokens: null,
+    cache_read_tokens: null,
+    cache_write_tokens: null
+  };
   for (const [key, group] of groups) {
     const attempts = group.filter((record) => object(record.message) && (record.message.model !== "<synthetic>" || isFailure(record)));
     if (!attempts.length)
       continue;
+    const id = attempts[0].message.id;
+    const failed = attempts.some(isFailure);
+    const named = attempts.map((record) => record.message.model).find((model2) => model2 !== undefined && model2 !== "<synthetic>");
+    const model = !failed && member(observedModels)(named) ? String(named) : null;
+    const model_state = model ? "reported" : !failed && named !== undefined ? "unrecognized" : "not_reported";
+    const facts = (state, counters) => responses.set(key, {
+      response_key: uuid(id) || prefixed("msg")(id) ? String(id) : null,
+      model,
+      model_state,
+      usage: { state, ...counters }
+    });
     if (copied.has(key)) {
       usage.copied_responses++;
+      facts("copied", unknownCounters);
       continue;
     }
+    const bucketKey = JSON.stringify([model_state, model]);
+    const bucket = models.get(bucketKey) ?? {
+      model,
+      model_state,
+      responses: 0,
+      failed_responses: 0,
+      unknown_usage_responses: 0,
+      input_tokens: 0,
+      output_tokens: 0,
+      cache_read_tokens: 0,
+      cache_write_tokens: 0
+    };
+    models.set(bucketKey, bucket);
     usage.responses++;
-    if (attempts.some(isFailure)) {
+    bucket.responses++;
+    if (failed) {
       usage.failed_responses++;
       usage.unknown_usage_responses++;
+      bucket.failed_responses++;
+      bucket.unknown_usage_responses++;
+      facts("failed", unknownCounters);
       continue;
     }
     const reported = attempts.map(knownUsage).find((value) => value !== null);
     if (!reported) {
       usage.unknown_usage_responses++;
+      bucket.unknown_usage_responses++;
+      facts("unknown", unknownCounters);
       continue;
     }
-    usage.input_tokens += reported.input;
-    usage.output_tokens += reported.output;
-    usage.cache_read_tokens += reported.cacheRead;
-    usage.cache_write_tokens += reported.cacheWrite;
+    for (const target of [usage, bucket]) {
+      target.input_tokens += reported.input;
+      target.output_tokens += reported.output;
+      target.cache_read_tokens += reported.cacheRead;
+      target.cache_write_tokens += reported.cacheWrite;
+    }
+    facts("reported", {
+      input_tokens: reported.input,
+      output_tokens: reported.output,
+      cache_read_tokens: reported.cacheRead,
+      cache_write_tokens: reported.cacheWrite
+    });
   }
-  return usage;
+  const order = { reported: 0, unrecognized: 1, not_reported: 2 };
+  const by_model = [...models.values()].sort((a, b) => order[a.model_state] - order[b.model_state] || String(a.model).localeCompare(String(b.model)));
+  return { usage, responses, by_model };
 }
 async function normalizeClaudeCodeSessions(input, component = createContentTransformer()) {
   try {
@@ -2569,7 +2727,14 @@ async function normalizeClaudeCodeSessions(input, component = createContentTrans
           transformed.set(String(row.value.uuid), result.value);
       }
       const selected = [...path].reverse().map((id) => transformed.get(id)).filter(Boolean);
-      const events = normalized(selected, counts);
+      const counted = usageOf(unique, file.predecessor_native_session_id ? source.get(file.predecessor_native_session_id) : undefined, !!file.predecessor_native_session_id);
+      const usage = counted.usage;
+      const originals = new Map(unique.filter((row) => uuid(row.value.uuid)).map((row) => [String(row.value.uuid), row.value]));
+      const digests = new Map;
+      for (const record of selected)
+        if (originals.get(String(record.uuid))?.isMeta === true)
+          digests.set(String(record.uuid), await sha256Hex2(renderedText(record)));
+      const events = normalized(selected, counts, originals, counted.responses, digests);
       if (!reports.length)
         throw new Refusal("eligibility_unknown");
       let merged;
@@ -2579,9 +2744,8 @@ async function normalizeClaudeCodeSessions(input, component = createContentTrans
         throw new Refusal("transformation_failed");
       }
       const { provenance: _provenance, ...report } = merged;
-      const usage = usageOf(unique, file.predecessor_native_session_id ? source.get(file.predecessor_native_session_id) : undefined, !!file.predecessor_native_session_id);
       const manifest = {
-        normalizer_version: 1,
+        normalizer_version: HARNESS_TIMELINE_NORMALIZER_VERSION,
         session_id: file.registration.archive_session_id,
         native_session_id: native,
         channel: "harness:claude-code",
@@ -2601,7 +2765,8 @@ async function normalizeClaudeCodeSessions(input, component = createContentTrans
         scrub_report: report,
         event_count: events.length,
         client_counts: counts,
-        usage
+        usage,
+        usage_by_model: counted.by_model
       };
       sessions.push({
         archive_session_id: file.registration.archive_session_id,
