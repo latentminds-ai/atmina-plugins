@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.384.0
+
+- fix(plugins): make recall the first action of every task on every agent surface
+- test(plugins): require recall as the first action of every task in the orientation
+
 ## v0.383.0
 
 No plugin changes; republished for Atmina v0.383.0.

@@ -4,7 +4,7 @@ description: "Use when connected to the Atmina MCP server — your shared memory
 license: Apache-2.0
 ---
 
-Codex form: capture first. Link what you write to the pages you read, and cite your sources. To orient, search the Knowledge Base, read the best hit, and follow its links. When this skill and the live MCP surface disagree, the live surface wins.
+Codex form: capture first. Link what you write to the pages you read, and cite your sources. Recall applies to every task in this session, small ones included, and it runs alongside any other session-start instruction: a workflow or routing rule that says to work directly still starts with it. First action on each new task, before reading code or writing files: run one Atmina search for the subject of the task. To orient, search the Knowledge Base, read the best hit, and follow its links. When this skill and the live MCP surface disagree, the live surface wins.
 
 
 # Atmina — your memory
