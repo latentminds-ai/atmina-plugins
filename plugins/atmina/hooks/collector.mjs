@@ -1983,6 +1983,15 @@ function traceObjectKeys(company_team_id, session_id) {
 }
 
 var HARNESS_TIMELINE_NORMALIZER_VERSION = 2;
+var HARNESS_OBSERVED_MODEL_NAMES = new Map([
+  ["claude-opus-5-5", "Claude Opus 5.5"],
+  ["claude-sonnet-5-5", "Claude Sonnet 5.5"],
+  ["claude-opus-5", "Claude Opus 5"],
+  ["claude-haiku-5-5", "Claude Haiku 5.5"],
+  ["claude-fable-5-1", "Claude Fable 5.1"],
+  ["claude-haiku-4-5-20251001", "Claude Haiku 4.5"],
+  ["claude-opus-4-8", "Claude Opus 4.8"]
+]);
 
 var object = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
 var uuid = (value) => typeof value === "string" && /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);
@@ -1990,13 +1999,7 @@ var prefixed = (prefix) => (value) => typeof value === "string" && new RegExp(`^
 var member = (values) => (value) => typeof value === "string" && values.includes(value);
 var iso = (value) => typeof value === "string" && /^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d+)?(?:Z|[+-]\d\d:\d\d)$/.test(value) && Number.isFinite(Date.parse(value));
 var observedModels = [
-  "claude-opus-5-5",
-  "claude-sonnet-5-5",
-  "claude-opus-5",
-  "claude-haiku-5-5",
-  "claude-fable-5-1",
-  "claude-haiku-4-5-20251001",
-  "claude-opus-4-8",
+  ...HARNESS_OBSERVED_MODEL_NAMES.keys(),
   "<synthetic>"
 ];
 var randomAgent = (value) => typeof value === "string" && /^a?[0-9a-f]{8,}$/.test(value);

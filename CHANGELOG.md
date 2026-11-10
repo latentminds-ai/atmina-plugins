@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.385.0
+
+- fix(trace): show recorded task context, wall time and model names
+
 ## v0.384.0
 
 - fix(plugins): make recall the first action of every task on every agent surface
