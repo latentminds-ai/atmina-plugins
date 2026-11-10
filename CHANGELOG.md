@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.383.0
+
+No plugin changes; republished for Atmina v0.383.0.
+
 ## v0.382.0
 
 - feat(trace): inspect observed skill invocations and supported revision evidence
