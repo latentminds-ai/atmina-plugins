@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.389.0
+
+- feat(rest): publish the Memory Routine operations as agent contract 2.4.0
+- ci(plugin-hooks): repair sticky workspace refs on the self-hosted Windows runner
+- test(plugins): give Windows tests a 60 s default timeout
+- test(plugins): accept the self-hosted Windows runner's account and speed
+- test(probe): pass an explicit environment to the launched PowerShell
+- test(probe): reproduce missing Windows host records
+
 ## v0.388.0
 
 No plugin changes; republished for Atmina v0.388.0.
