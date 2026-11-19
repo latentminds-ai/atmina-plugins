@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.391.0
+
+No plugin changes; republished for Atmina v0.391.0.
+
+## v0.390.0
+
+- feat(files): improve HTML artifact names, previews and history
+
 ## v0.389.0
 
 - feat(rest): publish the Memory Routine operations as agent contract 2.4.0
