@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.393.0
+
+- test(plugins): kill the capture interpreter in crash fixture
+
 ## v0.392.2
 
 No plugin changes; republished for Atmina v0.392.2.

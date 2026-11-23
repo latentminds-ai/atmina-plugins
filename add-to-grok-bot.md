@@ -1,6 +1,6 @@
 # Add Atmina to Grok Bot
 
-Setup content version: 0.392.2.
+Setup content version: 0.393.0.
 
 Grok Bot is separate from Grok Build and Cursor IDE. Installing the CLI plugin
 on Windows does not connect a Bot. Its remote MCP connections run on the Bot
