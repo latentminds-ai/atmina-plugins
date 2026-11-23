@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.392.2
+
+No plugin changes; republished for Atmina v0.392.2.
+
 ## v0.392.1
 
 - fix(auth): upgrade Better Auth to 1.7.7 for the magic-link takeover
