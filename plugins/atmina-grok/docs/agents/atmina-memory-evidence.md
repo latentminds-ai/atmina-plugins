@@ -54,7 +54,7 @@ second list.
 
 | Type | Use | Pin? |
 | --- | --- | --- |
-| `wiki-page` | Another durable wiki page. `path` is wiki-relative (`guides/run.md` → `wiki/guides/run.md`). | Yes, when citing a span. |
+| `wiki-page` | Another durable wiki page. Write `path` wiki-relative (`guides/run.md` → `wiki/guides/run.md`). A path that already starts with `wiki/` also resolves. | Yes, when citing a span. |
 | `official-document` | A document with standing, outside Atmina. `https` `url` + `retrieved`. | No. |
 | `system-record` | A record in a system of record (CRM, ticket, ledger). Locator + `https` `url` + `retrieved`. | No. |
 | `communication` | A message, thread, or meeting. | No. |
@@ -191,8 +191,9 @@ A link that comes **before** every marker of its entry binds to nothing.
 - A marker inside a code span, code block, or link label anchors nothing.
 
 **Where the link points is the viewer's rule, not the entry's.** The entry's
-`path` is wiki-relative (`guides/run.md` → `wiki/guides/run.md`); `..` and a
-leading `/` on that field are rejected. The span link is a Markdown link: it
+`path` is written wiki-relative (`guides/run.md` → `wiki/guides/run.md`), and a
+`wiki/guides/run.md` spelling resolves to the same file; `..` and a leading
+`/` on that field are rejected. The span link is a Markdown link: it
 resolves **relative to the citing page's directory**, the way the viewer
 opens it. Page-relative span links are supported: write
 `../guides/x.md#L29-L33` from `wiki/reference/` and the read path projects
@@ -352,8 +353,9 @@ Nothing durable to write: **no-op is success**.
 
 ## 8. Locator trap — `wiki-page` resolves only under `wiki/`
 
-`type: wiki-page` looks up `wiki/${path}` (or a `/wiki/<target>` suffix). A
-`wiki-page` entry whose `path` is `chronicle/…` looks for
+`type: wiki-page` looks up `wiki/${path}` (or a `/wiki/<target>` suffix). If
+that finds nothing and `path` already starts with `wiki/`, it looks up that
+exact KB path. A `wiki-page` entry whose `path` is `chronicle/…` looks for
 `wiki/chronicle/…` and comes back **unresolved**.
 
 Observe writes `chronicle/YYYY-MM-DD-<slug>.md`. Commit may set `source:` to

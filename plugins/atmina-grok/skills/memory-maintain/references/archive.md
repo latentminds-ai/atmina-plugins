@@ -37,7 +37,7 @@ Before each move:
    is not exhaustive; do not treat a quiet search as "no citations."
 3. For every other wiki page that might cite it, `read_file` and look
    for an evidence entry with `type: wiki-page` whose `path` is that
-   wiki-relative path (no leading `wiki/`, no `..`).
+   wiki-relative path or its full `wiki/…` form (no `..`).
 4. **Any such entry** → skip the move, flag in the trail with the citing
    page and evidence `id`. A human re-points (claim-repair proposal) or
    applies a reviewed repair; this skill does not.

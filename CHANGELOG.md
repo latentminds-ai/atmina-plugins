@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.394.0
+
+- fix(evidence): resolve wiki-page citations whose path starts with wiki/
+
 ## v0.393.0
 
 - test(plugins): kill the capture interpreter in crash fixture

@@ -97,7 +97,7 @@ Every other taught type is external (recorded, not verified by Atmina).
 | Entry has | Locator kind | Then |
 | --- | --- | --- |
 | none of `path`, `url`, or other locator fields | **absent** | STOP, `unresolved — no source recorded on entry \`<id>\``. |
-| `type: wiki-page` with `path: <p>` | **in-KB** | KB path is `wiki/<p>`, or any live path ending in `/wiki/<p>`. Reject `<p>` if it starts with `/`, contains `..`, or contains `\` — that is **absent**. Go to step 4. |
+| `type: wiki-page` with `path: <p>` | **in-KB** | KB path is `wiki/<p>`, or any live path ending in `/wiki/<p>`; if neither exists and `<p>` starts with `wiki/`, the KB path is `<p>`. Reject `<p>` if it starts with `/`, contains `..`, or contains `\` — that is **absent**. Go to step 4. |
 | a taught external type (`official-document`, `system-record`, `communication`, `regulatory-instrument`, `person-attestation`, `absence`, `measurement`, `dataset-slice`, `prior-version`, `derivation`) or a `url` | **external** | Go to step 6 with the `url` or other address the entry carries. |
 
 Unknown type names are valid bytes and render as a generic pill. Treat an
