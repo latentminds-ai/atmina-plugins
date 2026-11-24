@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.395.0
+
+No plugin changes; republished for Atmina v0.395.0.
+
 ## v0.394.0
 
 - fix(evidence): resolve wiki-page citations whose path starts with wiki/
